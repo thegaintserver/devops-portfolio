@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gourav — DevOps Engineer | CloudOps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f15;
+      --card:#071021;
+      --muted:#9aa6b2;
+      --accent:#00e5ff;
+      --accent-2:#7b61ff;
+      --glass: rgba(255,255,255,0.04);
+      --neon-shadow: 0 4px 30px rgba(0,229,255,0.08), 0 0 18px rgba(123,97,255,0.06);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02040a);color:#e6f0f6}
+    .container{max-width:980px;margin:40px auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#021825;font-weight:800;font-size:18px;box-shadow:var(--neon-shadow)}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin:6px 0 0}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:24px}
+    .card{background:linear-gradient(180deg,var(--card), rgba(12,18,30,0.6));border-radius:12px;padding:20px;box-shadow: 0 6px 30px rgba(0,0,0,0.6)}
+
+    .cta{display:flex;gap:12px;margin-top:16px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:var(--accent);cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;border:none}
+
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+    .service{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+    .service h4{margin:0 0 6px}
+    .price{color:var(--accent-2);font-weight:700}
+
+    .case-list{margin-top:20px;display:grid;gap:12px}
+    .case{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(123,97,255,0.03), rgba(0,229,255,0.02));border:1px solid rgba(123,97,255,0.04)}
+
+    aside.contact{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+    .contact h3{margin:0 0 10px}
+    .contact a{display:inline-block;margin-top:10px;color:var(--accent);text-decoration:none}
+
+    section{margin-top:28px}
+    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:14px;padding-bottom:80px}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+    }
+
+    /* little glows */
+    .accent-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">G</div>
+        <div>
+          <h1>Gourav — DevOps Engineer</h1>
+          <p class="lead">Cloud, CI/CD & automation for busy founders · Part-time evenings & weekends</p>
+        </div>
+      </div>
+      <nav>
+        <a class="btn" href="#services">Services</a>
+        <a class="btn" href="#cases">Case Studies</a>
+        <a class="btn primary" href="#contact">Hire Me</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <div class="card">
+            <p class="accent-pill">DevOps for Startups</p>
+            <h2 style="margin-top:12px">Fast deployments, reliable infra, and lower cloud costs</h2>
+            <p style="color:var(--muted);margin-top:8px">I help early-stage teams and solo founders deploy apps, automate CI/CD, migrate to containers/Kubernetes, and set up monitoring — all with clear fixed pricing and fast turnaround.</p>
+
+            <div class="cta">
+              <a class="btn primary" href="#contact">Get Consultation</a>
+              <a class="btn" href="#cases">See My Work</a>
+            </div>
+
+            <section id="services">
+              <h3 style="margin-top:18px">Services</h3>
+              <div class="services">
+                <div class="service">
+                  <h4>CI/CD Pipeline Setup</h4>
+                  <p>GitHub Actions · GitLab · Jenkins — fully automated build → test → deploy</p>
+                  <p class="price">Starting ₹7,000</p>
+                </div>
+                <div class="service">
+                  <h4>Cloud Infrastructure (AWS/Azure)</h4>
+                  <p>EC2, VMs, S3, Load Balancers, Networking</p>
+                  <p class="price">Starting ₹5,000</p>
+                </div>
+                <div class="service">
+                  <h4>App Deployment</h4>
+                  <p>Node, Python, PHP, Java, React, Next.js</p>
+                  <p class="price">Starting ₹3,000</p>
+                </div>
+                <div class="service">
+                  <h4>Docker & Kubernetes</h4>
+                  <p>Containerize apps and deploy on ECS / EKS / AKS</p>
+                  <p class="price">Docker ₹2,500 · K8s ₹8,000–₹20,000</p>
+                </div>
+                <div class="service">
+                  <h4>Monitoring & Alerts</h4>
+                  <p>Grafana · Prometheus · CloudWatch</p>
+                  <p class="price">Starting ₹5,000</p>
+                </div>
+                <div class="service">
+                  <h4>Troubleshooting & Fixes</h4>
+                  <p>Downtime fixes, pipeline failure resolution, DB issues</p>
+                  <p class="price">Starting ₹1,500</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <section id="cases">
+            <h3 style="margin-top:18px">Mini Case Studies</h3>
+            <div class="case-list">
+              <div class="case">
+                <strong>Automated Deployment for E-commerce App</strong>
+                <p style="margin:6px 0;color:var(--muted)">Set up GitHub Actions + AWS EC2 auto-deploy. Deployment time reduced from 20 mins to 2 mins.</p>
+              </div>
+              <div class="case">
+                <strong>Kubernetes Migration for Internal Tool</strong>
+                <p style="margin:6px 0;color:var(--muted)">Migrated 5 microservices from Docker to Kubernetes. Reduced downtime to near zero.</p>
+              </div>
+              <div class="case">
+                <strong>Cloud Cost Optimization</strong>
+                <p style="margin:6px 0;color:var(--muted)">Reduced cloud bill by 35% without touching performance.</p>
+              </div>
+              <div class="case">
+                <strong>Infrastructure for Mobile Backend</strong>
+                <p style="margin:6px 0;color:var(--muted)">Designed servers & pipelines for a telecom mobile app.</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <aside class="contact card" id="contact">
+          <h3>Contact & Quick Info</h3>
+          <p style="color:var(--muted)">Evening & weekend availability · Fixed pricing · Fast delivery</p>
+          <p style="margin-top:10px"><strong>WhatsApp:</strong> +91 XXX</p>
+          <p><strong>Email:</strong> yourmail@domain.com</p>
+          <p><strong>LinkedIn:</strong> (your profile link)</p>
+          <a href="mailto:yourmail@domain.com" class="btn primary" style="display:inline-block;margin-top:12px">Email Me</a>
+          <a href="https://calendly.com/" target="_blank" class="btn" style="display:inline-block;margin-top:12px">Book a Meeting</a>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">Pricing (examples)</div>
+          <ul style="margin:8px 0 0;color:var(--muted)">
+            <li>App Deployment — ₹3,000</li>
+            <li>CI/CD — ₹7,000</li>
+            <li>Dockerization — ₹2,500</li>
+            <li>Kubernetes — ₹8,000+</li>
+          </ul>
+        </aside>
+      </div>
+
+      <section>
+        <div class="card">
+          <h3>One-Page Portfolio (Short)</h3>
+          <p style="color:var(--muted)"><strong>Gourav — DevOps Engineer (Freelance & Part-time)</strong><br>
+          I help startups and solo founders with CI/CD automation, app deployments, cloud setup, Docker & Kubernetes, monitoring, and cost optimization.</p>
+
+          <h4 style="margin-top:12px">Recent Projects</h4>
+          <ul style="color:var(--muted)">
+            <li>Automated Node.js deployments (GitHub Actions)</li>
+            <li>Migrated microservices to Kubernetes (EKS)</li>
+            <li>Setup Grafana monitoring for 10+ services</li>
+            <li>Optimized AWS infra saving 35% costs</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year"></span> Gourav · DevOps Engineer — Evening availability · Built with ♥
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+  </script>
+</body>
+</html>
