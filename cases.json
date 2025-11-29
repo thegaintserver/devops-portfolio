@@ -1,0 +1,56 @@
+[
+  {
+    "title": "Kubernetes Microservices Platform",
+    "summary": "Migrated & optimized Java/Node microservices using Kubernetes & Helm with automated blue-green deployments and autoscaling.",
+    "impact": "Downtime reduced by ~95%, release cycles became 4× faster.",
+    "tools": ["Kubernetes", "Helm", "EKS/GKE", "Docker", "GitHub Actions"]
+  },
+  {
+    "title": "CI/CD Automation for Multi-Stack Apps",
+    "summary": "Built end-to-end CI/CD with caching, automated tests, vulnerability scanning, and environment-based delivery.",
+    "impact": "Build time improved by 70% and deployments dropped from 20 mins to under 2 mins.",
+    "tools": ["GitHub Actions", "Azure DevOps", "Jenkins", "Trivy", "SAST", "DAST"]
+  },
+  {
+    "title": "Cloud Cost Optimization",
+    "summary": "Optimized compute, storage, and autoscaling policies across AWS & GCP environments.",
+    "impact": "Achieved 32–38% cloud cost reduction without performance loss.",
+    "tools": ["AWS EC2", "S3", "EBS", "CloudWatch", "GCP VM"]
+  },
+  {
+    "title": "Hedgi – Tax & Income Automation Platform",
+    "summary": "Built microservices backend + Flutter frontend with AI-driven tax and income prediction.",
+    "impact": "Reduced manual effort by ~60% and increased accuracy by 30%.",
+    "tools": ["Spring Boot", "Flutter", "OpenAI", "Docker Compose", "GCP VM"]
+  },
+  {
+    "title": "BeWizor – AI Metadata Image Manager",
+    "summary": "Developed AI-powered image metadata extraction using Gemini & ChatGPT APIs.",
+    "impact": "Improved image search accuracy by 45% and reduced manual tagging by 80%.",
+    "tools": ["Kubernetes", "Helm", "GitOps", "Prometheus", "Grafana", "ELK"]
+  },
+  {
+    "title": "Infrastructure as Code (Multi-Environment)",
+    "summary": "Created reusable IaC modules used across Dev/QA/Stage/Prod environments.",
+    "impact": "Provisioning time decreased by 70% with consistent infra state.",
+    "tools": ["Terraform", "CloudFormation", "AWS", "GCP"]
+  },
+  {
+    "title": "Monitoring & Observability",
+    "summary": "Implemented dashboards, alerts, logs & error tracking for microservices and APIs.",
+    "impact": "MTTR reduced by ~50% and detection of issues improved by 60%.",
+    "tools": ["Prometheus", "Grafana", "CloudWatch", "ELK", "Datadog"]
+  },
+  {
+    "title": "Qlik Sense Multi-Node Deployment",
+    "summary": "Configured multi-node architecture with AD integration and load balancing.",
+    "impact": "Dashboards load 25% faster with 2× more concurrent users supported.",
+    "tools": ["Qlik Sense", "Windows Server", "Load Balancer"]
+  },
+  {
+    "title": "Large Data Pipeline Optimization",
+    "summary": "Optimized large ETL pipelines and improved indexing and batching.",
+    "impact": "Query performance improved by ~65% and pipeline stability increased.",
+    "tools": ["SQL", "Python", "Linux", "ETL"]
+  }
+]
