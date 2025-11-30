@@ -102,37 +102,27 @@
     /* TOP GRID: left flexible (auto) | right remaining */
     .top-grid {
       display: grid;
-      grid-template-columns: minmax(300px, 38%) 1fr;
+      grid-template-columns: 360px 1fr;   /* <-- change 360px to any width you prefer */
       gap: 18px;
-      align-items: stretch;      /* stretch columns to same height */
+      align-items: start;                 /* keep both columns aligned to top */
       margin-top: 18px;
     }
 
     /* make skills card fill column height and allow decoration behind content */
-    .skills-card{
+    .skills-card {
       position: relative;
-      overflow: visible;
-      background:rgba(255,255,255,0.02);
-      padding:14px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 18px 48px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.01);
-      display:flex;
-      flex-direction:column;
-      height:100%;
+      width: 100%;
+      max-width: 360px;   /* same as left column width above */
+      min-height: 220px;  /* adjust if you want taller/shorter default */
+      box-sizing: border-box;
+      overflow: visible;  /* pseudo-element glow sits behind (z-index:-1) */
+      display: flex;
+      flex-direction: column;
+      align-self: start;  /* ensure it sits at the top of the column */
+      margin-bottom: 0;   /* prevents extra gap with next section */
     }
 
-    .skills-card::after{
-      content:"";
-      position:absolute;
-      inset:-8px;
-      border-radius:16px;
-      background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(123,97,255,0.06));
-      filter:blur(14px);
-      opacity:0.16;
-      pointer-events:none;
-      z-index:-1; /* put behind */
-    }
+    .skills-card::after { z-index: -1; }
 
     .skills-card h3{margin:0 0 8px}
     .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
@@ -180,11 +170,11 @@
 
     /* responsive */
     @media (max-width:980px){
-      .top-grid{grid-template-columns:1fr;gap:12px}
+      .top-grid { grid-template-columns: 1fr; }
       .services-grid{grid-template-columns:1fr}
       .avatar-btn{width:60px;height:60px}
       /* keep skills card natural height on small screens */
-      .skills-card{height:auto}
+      .skills-card { max-width: 100%; min-height: auto; }
     }
     @media (max-width:560px){
       h1{font-size:18px}
