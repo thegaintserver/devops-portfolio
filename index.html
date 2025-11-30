@@ -293,62 +293,78 @@
   </div>
 
   <script>
-    document.getElementById('year').innerText = new Date().getFullYear();
-
-    // load /cases.json into the caseList
-    (async function loadCases(){
-      try {
-        const resp = await fetch('/cases.json', { cache: "no-store" });
-        if (!resp.ok) throw new Error('cases.json fetch failed: ' + resp.status);
-        const cases = await resp.json();
-        const container = document.getElementById('caseList');
-        container.innerHTML = "";
-
-        cases.forEach(c => {
-          const card = document.createElement('div');
-          card.className = "case";
-          card.innerHTML = `
-            <strong>${escapeHtml(c.title)}</strong>
-            <p style="margin:6px 0;color:var(--muted)">${escapeHtml(c.summary)}</p>
-            <p style="margin:6px 0;color:var(--accent-2);font-weight:700">${escapeHtml(c.impact)}</p>
-          `;
-          container.appendChild(card);
-        });
-      } catch (err) {
-        console.error("Could not load cases.json", err);
-        document.getElementById('caseList').innerHTML =
-          '<div class="case"><strong>Unable to load case studies</strong><p style="color:var(--muted)">Please try again later.</p></div>';
-      }
-      function escapeHtml(s){ return String(s||'').replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
-    })();
-
-    // Formspree AJAX submit (same as before)
     (function(){
       const form = document.getElementById('contactForm');
       const status = document.getElementById('formStatus');
       const sendBtn = document.getElementById('sendBtn');
-
+  
+      // Helper: open mailto with prefilled subject/body (fallback if form not configured)
+      function openMailClient(name, email, project, message) {
+        const to = 'youremail@domain.com'; // replace with your email
+        const subject = encodeURIComponent(`Website enquiry from ${name || 'Guest'}`);
+        const body = encodeURIComponent(
+          `Name: ${name || ''}\nEmail: ${email || ''}\nProject: ${project || ''}\n\nMessage:\n${message || ''}`
+        );
+        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      }
+  
       form.addEventListener('submit', async function(e){
-        const action = form.getAttribute('action') || '';
-        if (!action.includes('formspree.io/f/')) return; // allow native submit
-
         e.preventDefault();
+  
+        const action = (form.getAttribute('action') || '').trim();
         const name = form.querySelector('input[name="name"]').value.trim();
         const email = form.querySelector('input[name="email"]').value.trim();
-        if (!name || !email) { status.style.color='#f6b1b1'; status.textContent='Please enter name and email.'; return; }
-
-        sendBtn.disabled = true; sendBtn.textContent = 'Sending...'; status.textContent = '';
-
+        const project = form.querySelector('input[name="project"]').value.trim();
+        const message = form.querySelector('textarea[name="message"]').value.trim();
+  
+        if (!name || !email) {
+          status.style.color = '#f6b1b1';
+          status.textContent = 'Please enter your name and email.';
+          return;
+        }
+  
+        // If form action is the placeholder or missing, fallback to mailto so user can still contact you
+        const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === 'https://formspree.io/f/your_form_id';
+        if (isPlaceholder) {
+          status.style.color = 'var(--muted)';
+          status.textContent = 'Form not configured — opening your email client as fallback.';
+          // small delay so user sees status then mail client opens
+          setTimeout(()=> openMailClient(name, email, project, message), 600);
+          return;
+        }
+  
+        // Otherwise try Formspree AJAX POST (expects a valid Formspree form ID endpoint)
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending...';
+        status.textContent = '';
+  
         try {
           const formData = new FormData(form);
-          const resp = await fetch(action, { method:'POST', headers:{'Accept':'application/json'}, body: formData });
-          if (resp.ok) { status.style.color='#90ee90'; status.textContent='Thanks — message sent.'; form.reset(); }
-          else { const data = await resp.json().catch(()=>{}); status.style.color='#f6b1b1'; status.textContent = data?.error || 'Submission failed.'; }
+          const resp = await fetch(action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: formData
+          });
+  
+          if (resp.ok) {
+            status.style.color = '#90ee90';
+            status.textContent = 'Thanks — message sent. I will reply soon.';
+            form.reset();
+          } else {
+            const data = await resp.json().catch(()=>null);
+            status.style.color = '#f6b1b1';
+            status.textContent = data?.error || 'Submission failed — try email if it persists.';
+          }
         } catch (err) {
-          status.style.color='#f6b1b1'; status.textContent='Network error — try again.';
-        } finally { sendBtn.disabled=false; sendBtn.textContent='Send Message'; }
+          status.style.color = '#f6b1b1';
+          status.textContent = 'Network error — please try again.';
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send Message';
+        }
       });
     })();
   </script>
+
 </body>
 </html>
