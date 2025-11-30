@@ -281,7 +281,7 @@
     const sendBtn = document.getElementById('sendBtn');
 
     function openMailClient(name,email,project,message){
-      const to = 'thegainserver@gmail.com'; // replace if needed
+      const to = 'work@devopswithgourav.com'; // replace if needed
       const subject = encodeURIComponent('Website enquiry from ' + (name || 'Guest'));
       const body = encodeURIComponent(`Name: ${name || ''}\nEmail: ${email || ''}\nProject: ${project || ''}\n\n${message || ''}`);
       window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
