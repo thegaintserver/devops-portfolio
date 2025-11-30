@@ -48,7 +48,6 @@
       color:#e6f0f6;
       -webkit-font-smoothing:antialiased;
       overscroll-behavior-y:contain;
-      /* prevent horizontal overflow caused by badges/content */
       overflow-x: hidden;
     }
 
@@ -66,32 +65,22 @@
       box-shadow:0 60px 160px rgba(2,6,12,0.88);
       pointer-events:none;
       z-index:1;
-    
-      /* ensure the panel paints under everything and clips overflow */
       box-sizing: border-box;
       overflow: hidden;
     }
 
     /* content */
-    .page-wrap {
-    position: relative;
-    z-index: 2;
-  
-    /* MATCH panel width EXACTLY */
-    width: 100%;
-    max-width: var(--panel-max);
-  
-    /* center inside panel */
-    margin: 28px auto;
-  
-    /* inner padding so content doesn't touch edges */
-    padding: 24px;
-  
-    /* prevent ANY horizontal push */
-    box-sizing: border-box;
-    overflow-x: hidden;
+    .page-wrap{
+      position: relative;
+      z-index: 2;
+      /* we'll keep content inside the same width as panel */
+      width: calc(var(--panel-width));
+      max-width: calc(var(--panel-width));
+      margin: 28px auto;
+      padding: 24px;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
-
 
     header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
@@ -111,36 +100,55 @@
     .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:20px}
 
     /* TOP GRID: left flexible (auto) | right remaining */
-    .top-grid{display:grid;grid-template-columns:minmax(300px,38%)1fr;gap:18px;align-items:start;margin-top:18px;}
+    .top-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 38%) 1fr;
+      gap: 18px;
+      align-items: stretch;      /* stretch columns to same height */
+      margin-top: 18px;
+    }
 
-
-    /* skills card with glow border */
+    /* make skills card fill column height and allow decoration behind content */
     .skills-card{
+      position: relative;
+      overflow: visible;
       background:rgba(255,255,255,0.02);
-      padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.04);
       box-shadow:0 18px 48px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.01);
-      position:relative;
-      /* glow */
-      outline: 2px solid transparent;
-      transition:box-shadow .18s,transform .12s;
+      display:flex;
+      flex-direction:column;
+      height:100%;
     }
+
     .skills-card::after{
-      content:"";position:absolute;inset:-8px;border-radius:16px;
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius:16px;
       background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(123,97,255,0.06));
-      filter:blur(14px);opacity:0.16;pointer-events:none;
+      filter:blur(14px);
+      opacity:0.16;
+      pointer-events:none;
+      z-index:-1; /* put behind */
     }
+
     .skills-card h3{margin:0 0 8px}
     .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
 
-    /* skill badges (tighter spacing) */
-    .skill-list {
-      flex-wrap: wrap;
-      gap: 8px;
-      overflow-wrap: break-word;
+    /* skill badges: flexible & wrap */
+    .skill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:6px;
+      align-items:center;
     }
-
     .skill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
     .skill .years{color:var(--muted);font-weight:700;font-size:12px}
+    /* allow badge text to wrap if long */
+    .skill { white-space: normal; max-width: 220px; }
 
     /* services column and cards */
     .services-col{display:block}
@@ -154,7 +162,7 @@
     .service p{margin:0;color:var(--muted);font-size:14px}
     .price{margin-top:8px;color:var(--accent-2);font-weight:800}
 
-    /* cases / contact */
+    /* small cases area and contact */
     .case-list{display:grid;gap:12px;margin-top:12px}
     .case{padding:14px;border-radius:12px;background:linear-gradient(90deg,rgba(123,97,255,0.05),rgba(0,229,255,0.02));border:1px solid rgba(123,97,255,0.06)}
     input,textarea{border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.16);color:#e6f0f6;padding:10px 12px;border-radius:10px;outline:none}
@@ -175,6 +183,8 @@
       .top-grid{grid-template-columns:1fr;gap:12px}
       .services-grid{grid-template-columns:1fr}
       .avatar-btn{width:60px;height:60px}
+      /* keep skills card natural height on small screens */
+      .skills-card{height:auto}
     }
     @media (max-width:560px){
       h1{font-size:18px}
@@ -205,7 +215,7 @@
       </nav>
     </header>
 
-    <!-- top grid: skills (left, flexible width) + services (right) -->
+    <!-- top grid: skills (left) + services (right) -->
     <section class="top-grid" id="skills">
       <!-- SKILLS: flexible width follows content, auto height -->
       <aside class="skills-card" role="complementary" aria-labelledby="skills-title">
@@ -235,7 +245,7 @@
         </div>
       </aside>
 
-      <!-- SERVICES: right column uses remaining width -->
+      <!-- SERVICES: right column -->
       <div class="services-col">
         <section id="services" class="card">
           <p class="accent-pill">DevOps for Startups</p>
