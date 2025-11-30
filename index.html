@@ -41,15 +41,35 @@
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
     }
 
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02030a);color:#e6f0f6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:contain}
-    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#02030a);
+      color:#e6f0f6;
+      -webkit-font-smoothing:antialiased;
+      overscroll-behavior-y:contain;
+      /* prevent horizontal overflow caused by badges/content */
+      overflow-x: hidden;
+    }
 
-    /* fixed solid panel */
+    /* fixed solid panel (center) */
     .back-panel{
-      position:fixed;left:50%;transform:translateX(-50%);top:0;
-      width:var(--panel-width);max-width:var(--panel-max);height:100vh;
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      top:0;
+      width:var(--panel-width);
+      max-width:var(--panel-max);
+      height:100vh;
       background:linear-gradient(180deg,var(--panel),var(--panel-accent));
-      border-radius:14px;box-shadow:0 60px 160px rgba(2,6,12,0.88);pointer-events:none;z-index:1;
+      border-radius:14px;
+      box-shadow:0 60px 160px rgba(2,6,12,0.88);
+      pointer-events:none;
+      z-index:1;
+    
+      /* ensure the panel paints under everything and clips overflow */
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     /* content */
