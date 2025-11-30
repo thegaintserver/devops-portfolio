@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2JHEM0Z6HS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2JHEM0Z6HS');
-  </script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gourav Saini — Sr. DevOps Engineer | CloudOps</title>
@@ -22,13 +13,13 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gourav Saini — Sr. DevOps Engineer">
   <meta property="og:description" content="Cloud, CI/CD, Docker, Kubernetes & Infra Automation for Startups.">
-  <meta property="og:image" content="https://devopswithgourav.com/preview.jpg">
-  <meta property="og:url" content="https://devopswithgourav.com">
+  <meta property="og:image" content="https://yourdomain.com/preview.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gourav Saini — DevOps Engineer">
   <meta name="twitter:description" content="Cloud Infra, CI/CD, Docker, Kubernetes & Monitoring. Evening & weekend availability.">
-  <meta name="twitter:image" content="https://devopswithgourav.com/preview.jpg">
+  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,206 +35,119 @@
       --accent:#00e5ff;
       --accent-2:#7b61ff;
       --card-shadow:0 18px 60px rgba(2,6,12,0.72);
-      --panel-gutter:20px; /* small outer gap left/right */
+      --panel-gutter:18px;
       --panel-width:calc(100vw - (var(--panel-gutter) * 2));
       --panel-max:1600px;
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
     }
 
-    html,body{
-      margin:0;height:100%;
-      background:linear-gradient(180deg,var(--bg),#02030a);
-      color:#e6f0f6;
-      -webkit-font-smoothing:antialiased;
-      overscroll-behavior-y:contain;
-    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02030a);color:#e6f0f6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:contain}
     *{box-sizing:border-box}
 
-    /* Fixed solid panel background: slightly wider so content can reach closer */
+    /* fixed solid panel */
     .back-panel{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      top:0;
-      width:var(--panel-width);
-      max-width:var(--panel-max);
-      height:100vh;
+      position:fixed;left:50%;transform:translateX(-50%);top:0;
+      width:var(--panel-width);max-width:var(--panel-max);height:100vh;
       background:linear-gradient(180deg,var(--panel),var(--panel-accent));
-      border-radius:14px;
-      box-shadow:0 60px 160px rgba(2,6,12,0.88);
-      pointer-events:none;z-index:1;
+      border-radius:14px;box-shadow:0 60px 160px rgba(2,6,12,0.88);pointer-events:none;z-index:1;
     }
 
-    /* Page wrap will be slightly wider than before so cards align nearer edges.
-       max-width uses panel width minus internal content offset so it visually sits inside panel. */
-    .page-wrap{
-      position:relative;z-index:2;
-      max-width:calc(var(--panel-width) - 56px);
-      margin:28px auto;
-      padding:16px 18px;
-    }
+    /* content */
+    .page-wrap{position:relative;z-index:2;max-width:calc(var(--panel-width) - 56px);margin:28px auto;padding:16px 18px}
 
-    /******** HEADER ********/
-    header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-    }
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
 
-    .logo-img{
-      width:68px;height:68px;border-radius:12px;overflow:hidden;
-      border:2px solid rgba(0,229,255,0.26);
-      box-shadow:0 12px 40px rgba(11,229,255,0.06);
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    }
-    .logo-img img{width:100%;height:100%;object-fit:cover;display:block}
+    /* rounded avatar + clickable */
+    .avatar-btn{width:72px;height:72px;border-radius:14px;overflow:hidden;border:2px solid rgba(0,229,255,0.22);box-shadow:0 12px 40px rgba(11,229,255,0.06);cursor:pointer;flex-shrink:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06))}
+    .avatar-btn img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
 
     h1{margin:0;font-size:24px}
     p.lead{margin:6px 0 0;color:var(--muted);font-size:14.2px;max-width:760px;line-height:1.45}
 
-    /* Neon nav buttons */
-    .nav-btn{
-      text-decoration:none;color:#021825;font-weight:700;
-      padding:8px 12px;border-radius:12px;font-size:14px;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      box-shadow:0 8px 30px rgba(0,229,255,0.06);
-      transition:transform .14s,box-shadow .14s,filter .14s;
-    }
-    .nav-btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 48px rgba(0,229,255,0.1);filter:brightness(1.04);}
+    /* nav */
+    .nav-btn{text-decoration:none;color:#021825;padding:8px 12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(0,229,255,0.06)}
+    .nav-btn:hover{transform:translateY(-3px);filter:brightness(1.04)}
 
-    /******** CARD ********/
-    .card{
-      background:rgba(255,255,255,0.03);
-      border-radius:12px;padding:20px;
-      box-shadow:var(--card-shadow);
-      margin-bottom:20px;
-    }
+    /* card common */
+    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:20px}
 
-    /******** TWO COLUMN SPLIT: Skills + Services ********/
-    .split-grid{
-      display:grid;
-      grid-template-columns:300px 1fr; /* left column slightly narrower */
-      gap:18px;
-      margin-top:18px;
-      align-items:start;
-    }
+    /* TOP GRID: left flexible (auto) | right remaining */
+    .top-grid{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-top:18px}
 
-    /* Skills card */
+    /* skills card with glow border */
     .skills-card{
-      background:rgba(255,255,255,0.03);
-      padding:16px;border-radius:12px;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:var(--card-shadow);
-      line-height:1.45;
-    }
-    .skills-card h3{margin:0 0 6px}
-    .skills-card .desc{color:var(--muted);font-size:13.8px;margin-top:6px}
-
-    /* skill badges: tighter */
-    .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .skill{
-      padding:6px 9px;border-radius:999px;
       background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.04);
-      font-size:13px;color:#e6f0f6;
-      display:inline-flex;align-items:center;gap:6px;
+      padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+      box-shadow:0 18px 48px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.01);
+      position:relative;
+      /* glow */
+      outline: 2px solid transparent;
+      transition:box-shadow .18s,transform .12s;
     }
-    .skill .years{color:var(--muted);font-weight:700;font-size:12px;opacity:0.95}
-
-    /******** SERVICES ********/
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:14px;margin-top:14px;
+    .skills-card::after{
+      content:"";position:absolute;inset:-8px;border-radius:16px;
+      background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(123,97,255,0.06));
+      filter:blur(14px);opacity:0.16;pointer-events:none;
     }
+    .skills-card h3{margin:0 0 8px}
+    .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
 
-    .service{
-      position:relative;padding:16px;border-radius:12px;
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.04);
-      transition:transform .14s,box-shadow .14s;
-    }
+    /* skill badges (tighter spacing) */
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
+    .skill .years{color:var(--muted);font-weight:700;font-size:12px}
 
-    .service::before{
-      content:"";
-      position:absolute;left:12px;right:12px;
-      top:-10px;height:6px;border-radius:8px;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      opacity:0;transform:translateY(-3px);
-      transition:opacity .16s,transform .16s;
-      box-shadow:0 8px 28px rgba(123,97,255,0.06);
-    }
+    /* services column and cards */
+    .services-col{display:block}
+    .accent-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;margin-bottom:10px}
+    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
 
-    .service:hover::before{opacity:1;transform:translateY(0);}
-    .service:hover{transform:translateY(-6px);box-shadow:0 26px 78px rgba(2,6,12,0.8);}
-
-    .service h4{margin:0 0 6px;font-size:15.5px}
+    .service{position:relative;padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
+    .service::before{content:"";position:absolute;left:12px;right:12px;top:-10px;height:6px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0;transform:translateY(-3px);transition:opacity .16s,transform .16s}
+    .service:hover::before{opacity:1;transform:translateY(0)}
+    .service h4{margin:0 0 6px;font-size:15px}
     .service p{margin:0;color:var(--muted);font-size:14px}
-    .price{margin-top:8px;color:var(--accent-2);font-weight:800;font-size:14px}
+    .price{margin-top:8px;color:var(--accent-2);font-weight:800}
 
-    /******** CASES ********/
+    /* cases / contact */
     .case-list{display:grid;gap:12px;margin-top:12px}
-    .case{
-      padding:14px;border-radius:12px;
-      background:linear-gradient(90deg,rgba(123,97,255,0.05),rgba(0,229,255,0.02));
-      border:1px solid rgba(123,97,255,0.06);
-    }
-    .case strong{font-size:15px}
-
-    /******** CONTACT ********/
-    input,textarea{
-      border:1px solid rgba(255,255,255,0.1);
-      background:rgba(0,0,0,0.16);
-      color:#e6f0f6;width:100%;
-      padding:10px 12px;border-radius:10px;
-      outline:none;transition:border .12s,box-shadow .12s;
-      font-size:14px;
-    }
-    input:focus,textarea:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 4px rgba(0,229,255,0.06);
-    }
-    .btn-send{
-      padding:10px 16px;border-radius:12px;border:none;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#021825;font-weight:800;cursor:pointer;
-      transition:transform .12s,box-shadow .12s;
-    }
-    .btn-send:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,229,255,0.10)}
+    .case{padding:14px;border-radius:12px;background:linear-gradient(90deg,rgba(123,97,255,0.05),rgba(0,229,255,0.02));border:1px solid rgba(123,97,255,0.06)}
+    input,textarea{border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.16);color:#e6f0f6;padding:10px 12px;border-radius:10px;outline:none}
+    input:focus,textarea:focus{box-shadow:0 0 0 4px rgba(0,229,255,0.06);border-color:var(--accent)}
+    .btn-send{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;cursor:pointer}
 
     footer{text-align:center;margin-top:36px;color:var(--muted);font-size:13.5px;padding-bottom:36px}
 
-    /* Responsive */
-    @media (max-width:1100px){
-      .page-wrap{max-width:calc(var(--panel-width) - 40px);}
-    }
-    @media (max-width:980px){
-      .split-grid{grid-template-columns:1fr;gap:12px}
-      .logo-img{width:60px;height:60px}
-      h1{font-size:20px}
-      .skills-card{order:0}
-      .page-wrap{padding:14px}
-      .services-grid{grid-template-columns:1fr}
-    }
+    /* avatar modal */
+    .avatar-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,12,0.6);z-index:9999}
+    .avatar-modal.open{display:flex}
+    .avatar-modal .modal-card{max-width:720px;width:88%;background:linear-gradient(180deg,#0b1a23,#061017);padding:18px;border-radius:12px;box-shadow:0 40px 120px rgba(2,6,12,0.9);border:1px solid rgba(255,255,255,0.04)}
+    .avatar-modal img{width:100%;height:auto;border-radius:8px;display:block}
+    .avatar-close{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer}
 
-    /* small screens */
+    /* responsive */
+    @media (max-width:980px){
+      .top-grid{grid-template-columns:1fr;gap:12px}
+      .services-grid{grid-template-columns:1fr}
+      .avatar-btn{width:60px;height:60px}
+    }
     @media (max-width:560px){
-      .logo-img{width:52px;height:52px}
       h1{font-size:18px}
       p.lead{font-size:13px}
-      .skill{font-size:12px;padding:6px 8px}
     }
   </style>
 </head>
-
 <body>
-  <div class="back-panel"></div>
+  <div class="back-panel" aria-hidden="true"></div>
 
   <div class="page-wrap">
-
-    <!-- HEADER -->
+    <!-- header -->
     <header>
       <div class="brand">
-        <div class="logo-img"><img src="avatar.jpeg" alt="Gourav"></div>
+        <div class="avatar-btn" id="avatarBtn" title="Click to preview">
+          <img src="avatar.jpeg" alt="Gourav">
+        </div>
         <div>
           <h1>Gourav Saini — Sr. DevOps Engineer (6 Yrs)</h1>
           <p class="lead">I help startups build scalable cloud infrastructure, automate CI/CD, deploy applications, reduce cloud cost & set up monitoring — available evenings & weekends.</p>
@@ -257,16 +161,15 @@
       </nav>
     </header>
 
-    <!-- SKILLS + SERVICES SPLIT -->
-    <div class="split-grid" id="skills">
-
-      <!-- LEFT Skills -->
-      <aside class="skills-card" aria-label="Skills & Expertise">
-        <h3 style="margin-top:0">Skills & Expertise</h3>
+    <!-- top grid: skills (left, flexible width) + services (right) -->
+    <section class="top-grid" id="skills">
+      <!-- SKILLS: flexible width follows content, auto height -->
+      <aside class="skills-card" role="complementary" aria-labelledby="skills-title">
+        <h3 id="skills-title" style="margin-top:0">Skills & Expertise</h3>
         <p class="desc">Sr. DevOps engineer with 6 years of experience across cloud platforms, automation, monitoring, scaling and production-grade deployments.</p>
 
         <div class="skill-list" aria-hidden="false" role="list">
-          <!-- Experienced first -->
+          <!-- experienced first -->
           <div class="skill">AWS <span class="years">6y</span></div>
           <div class="skill">Azure <span class="years">2y</span></div>
           <div class="skill">GCP <span class="years">2y</span></div>
@@ -274,82 +177,84 @@
           <div class="skill">Jenkins</div>
           <div class="skill">GitHub Actions</div>
           <div class="skill">Azure CI/CD</div>
-          <div class="skill">Docker</div>
-          <div class="skill">Kubernetes</div>
           <div class="skill">Terraform</div>
           <div class="skill">Ansible</div>
+          <div class="skill">Docker</div>
+          <div class="skill">Kubernetes</div>
           <div class="skill">Grafana</div>
           <div class="skill">Datadog</div>
           <div class="skill">Prometheus</div>
           <div class="skill">CloudWatch</div>
           <div class="skill">Shell Scripting</div>
-          <div class="skill">Firebase</div
+          <div class="skill">Firebase</div>
           <div class="skill">Agile</div>
         </div>
       </aside>
 
-      <!-- RIGHT Services -->
-      <section id="services" class="card">
-        <p class="accent-pill">DevOps for Startups</p>
-        <h2 style="margin-top:12px;font-size:20px">Fast deployments, reliable infra, and lower cloud costs</h2>
-        <p style="color:var(--muted)">I help teams deploy apps, automate CI/CD, migrate to containers, and set up monitoring.</p>
+      <!-- SERVICES: right column uses remaining width -->
+      <div class="services-col">
+        <section id="services" class="card">
+          <p class="accent-pill">DevOps for Startups</p>
+          <h2 style="margin-top:12px;font-size:20px">Fast deployments, reliable infra, and lower cloud costs</h2>
+          <p style="color:var(--muted)">I help teams deploy apps, automate CI/CD, migrate to containers, and set up monitoring.</p>
 
-        <div class="services-grid">
-          <div class="service">
-            <h4>CI/CD Pipeline Setup</h4>
-            <p>GitHub Actions · GitLab · Jenkins</p>
-            <div class="price">₹7,000</div>
+          <div class="services-grid" aria-label="Services">
+            <div class="service">
+              <h4>CI/CD Pipeline Setup</h4>
+              <p>GitHub Actions · GitLab · Jenkins</p>
+              <div class="price">₹7,000</div>
+            </div>
+
+            <div class="service">
+              <h4>Cloud Infrastructure (AWS/Azure)</h4>
+              <p>EC2, S3, VMs, Load Balancers</p>
+              <div class="price">₹5,000</div>
+            </div>
+
+            <div class="service">
+              <h4>App Deployment</h4>
+              <p>Node · Python · PHP · React</p>
+              <div class="price">₹3,000</div>
+            </div>
+
+            <div class="service">
+              <h4>Docker & Kubernetes</h4>
+              <p>Containerize & deploy apps</p>
+              <div class="price">₹2,500–₹20,000</div>
+            </div>
+
+            <div class="service">
+              <h4>Monitoring & Alerts</h4>
+              <p>Grafana · Prometheus · Datadog</p>
+              <div class="price">₹5,000</div>
+            </div>
+
+            <div class="service">
+              <h4>Troubleshooting & Fixes</h4>
+              <p>Downtime, DB, scaling issues</p>
+              <div class="price">₹1,500</div>
+            </div>
           </div>
+        </section>
+      </div>
+    </section>
 
-          <div class="service">
-            <h4>Cloud Infrastructure (AWS/Azure)</h4>
-            <p>EC2, S3, VMs, Load Balancers</p>
-            <div class="price">₹5,000</div>
-          </div>
-
-          <div class="service">
-            <h4>App Deployment</h4>
-            <p>Node · Python · PHP · React</p>
-            <div class="price">₹3,000</div>
-          </div>
-
-          <div class="service">
-            <h4>Docker & Kubernetes</h4>
-            <p>Containerize & deploy apps</p>
-            <div class="price">₹2,500–₹20,000</div>
-          </div>
-
-          <div class="service">
-            <h4>Monitoring & Alerts</h4>
-            <p>Grafana · Prometheus · Datadog</p>
-            <div class="price">₹5,000</div>
-          </div>
-
-          <div class="service">
-            <h4>Troubleshooting & Fixes</h4>
-            <p>Downtime, DB, scaling issues</p>
-            <div class="price">₹1,500</div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- CASE STUDIES -->
+    <!-- Cases -->
     <section id="cases" class="card">
       <h3>Mini Case Studies</h3>
       <div id="caseList" class="case-list"></div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- Contact -->
     <section id="contact" class="card">
       <h3>Contact Me</h3>
       <p style="color:var(--muted)">Fast response · Evening & weekend availability</p>
 
-      <p><strong>WhatsApp:</strong> <a href="https://wa.me/918875025888" style="color:var(--accent)">+91 8875025888</a></p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/910005025888" style="color:var(--accent)">+91 8875025888</a></p>
       <p><strong>Email:</strong> <a href="mailto:work@devopswithgourav.com" style="color:var(--accent)">work@devopswithgourav.com</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/gourav-saini-june1994" style="color:var(--accent)">gouravsaini</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/gourav-saini-yes" style="color:var(--accent)">gouravsaini</a></p>
 
-      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xyzrzjeg" method="POST">
+      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xiiiiiig" method="POST">
         <div style="display:flex;gap:10px;margin-bottom:10px;">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Your email" required>
@@ -368,49 +273,88 @@
     <footer>© <span id="year"></span> Gourav Saini — Built in India 🇮🇳</footer>
   </div>
 
-  <!-- CASE STUDIES LOADER -->
+  <!-- Avatar modal -->
+  <div id="avatarModal" class="avatar-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <img id="modalImg" src="avatar.jpeg" alt="Gourav large preview">
+      <div style="text-align:right">
+        <button id="closeAvatar" class="avatar-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASES loader & form handling & avatar JS -->
   <script>
-  (async function loadCases(){
-    const container = document.getElementById('caseList');
-    const fallback = [
-      {
-        "title":"Kubernetes Microservices Platform",
-        "summary":"Migrated & optimized Java/Node microservices using Kubernetes, Helm & autoscaling.",
-        "impact":"Downtime reduced by 95%."
-      },
-      {
-        "title":"CI/CD Automation",
-        "summary":"End-to-end CI/CD with caching, scanning & environment-based delivery.",
-        "impact":"Build time improved 70%."
-      },
-      {
-        "title":"Cloud Cost Optimization",
-        "summary":"Optimized compute & autoscaling across AWS & GCP.",
-        "impact":"Saved 32–38% cloud cost."
+  (function(){
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // load cases.json (fallback)
+    (async function loadCases(){
+      const container = document.getElementById('caseList');
+      const fallback = [
+        {"title":"Kubernetes Microservices Platform","summary":"Migrated & optimized Java/Node microservices using Kubernetes & Helm with automated blue-green deployments and autoscaling.","impact":"Downtime reduced by ~95%."},
+        {"title":"CI/CD Automation for Multi-Stack Apps","summary":"Built end-to-end CI/CD with caching, automated tests, vulnerability scanning and environment-based delivery.","impact":"Build time improved by 70%."},
+        {"title":"Cloud Cost Optimization","summary":"Optimized compute & autoscaling policies across AWS & GCP.","impact":"Saved 32–38% cloud cost."}
+      ];
+      try{
+        const resp = await fetch('/cases.json',{cache:'no-store'});
+        if(!resp.ok) return render(fallback);
+        const data = await resp.json().catch(()=>null);
+        return render(Array.isArray(data) && data.length ? data : fallback);
+      }catch(e){ return render(fallback); }
+
+      function render(list){
+        container.innerHTML = '';
+        list.forEach(c=>{
+          const el = document.createElement('div');
+          el.className = 'case';
+          el.innerHTML = `<strong>${escapeHtml(c.title)}</strong>
+                          <p style="color:var(--muted);margin-top:8px">${escapeHtml(c.summary)}</p>
+                          <p style="color:var(--accent-2);font-weight:700;margin-top:8px">${escapeHtml(c.impact || '')}</p>`;
+          container.appendChild(el);
+        });
       }
-    ];
+      function escapeHtml(s=''){ return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+    })();
 
-    try{
-      const resp = await fetch('/cases.json',{cache:'no-store'});
-      if(!resp.ok) return render(fallback);
-      const data = await resp.json();
-      return render(data.length ? data : fallback);
-    }catch{ render(fallback); }
+    // contact form: Formspree fallback to mailto
+    (function(){
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const action = (form.getAttribute('action')||'').trim();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        if(!name || !email){ status.textContent = 'Please enter name and email.'; status.style.color='#f6b1b1'; return; }
 
-    function render(list){
-      container.innerHTML = "";
-      list.forEach(c=>{
-        const el = document.createElement('div');
-        el.className = 'case';
-        el.innerHTML = `<strong>${escapeHtml(c.title)}</strong>
-                        <p style="color:var(--muted);margin-top:8px">${escapeHtml(c.summary)}</p>
-                        <p style="color:var(--accent-2);font-weight:700;margin-top:8px">${escapeHtml(c.impact || '')}</p>`;
-        container.appendChild(el);
+        const placeholder = !action || action.includes('your_form_id') || action.endsWith('/f/');
+        if(placeholder){
+          status.textContent = 'Form not configured — opening email client.';
+          status.style.color = 'var(--muted)';
+          setTimeout(()=>{ window.location.href = `mailto:work@devopswithgourav.com?subject=${encodeURIComponent('Website enquiry from '+name)}&body=${encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+(form.project.value||'')+'\n\n'+(form.message.value||''))}` }, 500);
+          return;
+        }
+
+        try{
+          const resp = await fetch(action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
+          if(resp.ok){ status.textContent='Thanks — message sent.'; status.style.color='#90ee90'; form.reset(); } else { status.textContent='Submission failed — try email.'; status.style.color='#f6b1b1'; }
+        }catch(err){ status.textContent='Network error — try again.'; status.style.color='#f6b1b1'; }
       });
-    }
-    function escapeHtml(s=''){ return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+    })();
+
+    // avatar modal behavior
+    const avatarBtn = document.getElementById('avatarBtn');
+    const avatarModal = document.getElementById('avatarModal');
+    const closeAvatar = document.getElementById('closeAvatar');
+    avatarBtn && avatarBtn.addEventListener('click', ()=>{ avatarModal.classList.add('open'); avatarModal.setAttribute('aria-hidden','false'); });
+    closeAvatar && closeAvatar.addEventListener('click', ()=>{ avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); });
+    avatarModal && avatarModal.addEventListener('click', (e)=>{ if(e.target === avatarModal) { avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); } });
+
+    // keyboard close (esc)
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); } });
   })();
-  document.getElementById('year').innerText = new Date().getFullYear();
   </script>
 </body>
 </html>
