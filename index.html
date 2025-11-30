@@ -36,7 +36,7 @@
       --accent-2:#7b61ff;
       --card-shadow:0 18px 60px rgba(2,6,12,0.72);
       --panel-gutter:18px;
-      --panel-width:calc(100vw - (var(--panel-gutter) * 2));
+      --panel-width: min(100vw - 36px, 1600px);
       --panel-max:1600px;
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
     }
@@ -73,7 +73,25 @@
     }
 
     /* content */
-    .page-wrap{position:relative;z-index:2;max-width:calc(var(--panel-width) - 56px);margin:28px auto;padding:16px 18px}
+    .page-wrap {
+    position: relative;
+    z-index: 2;
+  
+    /* MATCH panel width EXACTLY */
+    width: 100%;
+    max-width: var(--panel-max);
+  
+    /* center inside panel */
+    margin: 28px auto;
+  
+    /* inner padding so content doesn't touch edges */
+    padding: 24px;
+  
+    /* prevent ANY horizontal push */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    }
+
 
     header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
@@ -115,7 +133,12 @@
     .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
 
     /* skill badges (tighter spacing) */
-    .skill-list{display:flex;flex-wrap:wrap;gap:8px}
+    .skill-list {
+      flex-wrap: wrap;
+      gap: 8px;
+      overflow-wrap: break-word;
+    }
+
     .skill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
     .skill .years{color:var(--muted);font-weight:700;font-size:12px}
 
