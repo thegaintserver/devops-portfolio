@@ -331,94 +331,127 @@
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    /* -------- LOAD CASE STUDIES -------- */
-    (async function loadCases(){
-      try {
-        const resp = await fetch('/cases.json', { cache: "no-store" });
-        const cases = await resp.json();
-        const container = document.getElementById('caseList');
-        container.innerHTML = "";
-
-        cases.forEach(c => {
-          const card = document.createElement('div');
-          card.className = "case";
-          card.innerHTML = `
-            <strong>${c.title}</strong>
-            <p style="color:var(--muted)">${c.summary}</p>
-            <p style="color:var(--accent-2); font-weight:700">${c.impact}</p>
-          `;
-          container.appendChild(card);
-        });
-
-      } catch (err) {
-        document.getElementById('caseList').innerHTML =
-          '<div class="case"><strong>Unable to load case studies</strong></div>';
+  /*
+    Robust case-loader:
+    - Fetches /cases.json
+    - If fetch fails or returns empty array, falls back to sample cases
+    - Logs errors to console
+    - Adds a small debug banner showing count (remove later)
+    - Ensures case cards are visible (style tweaks applied here)
+  */
+  (async function loadCases() {
+    const container = document.getElementById('caseList');
+    if (!container) {
+      console.error("caseList container not found in DOM");
+      return;
+    }
+  
+    // Make sure container is visible (extra safety)
+    container.style.display = 'grid';
+    container.style.gap = '14px';
+    container.style.zIndex = 3;
+  
+    // Debug banner helper
+    function showDebug(text) {
+      let dbg = document.getElementById('case-debug-banner');
+      if (!dbg) {
+        dbg = document.createElement('div');
+        dbg.id = 'case-debug-banner';
+        dbg.style.position = 'fixed';
+        dbg.style.right = '18px';
+        dbg.style.bottom = '18px';
+        dbg.style.padding = '8px 12px';
+        dbg.style.background = 'rgba(0,0,0,0.6)';
+        dbg.style.color = '#fff';
+        dbg.style.border = '1px solid rgba(255,255,255,0.06)';
+        dbg.style.borderRadius = '8px';
+        dbg.style.zIndex = 9999;
+        dbg.style.fontSize = '13px';
+        document.body.appendChild(dbg);
       }
-    })();
-
-    /* -------- CONTACT FORM FIX (Formspree + fallback) -------- */
-    (function(){
-      const form = document.getElementById('contactForm');
-      const status = document.getElementById('formStatus');
-      const sendBtn = document.getElementById('sendBtn');
-
-      function fallbackEmail(name,email,project,message){
-        window.location.href =
-          `mailto:thegainserver@gmail.com?subject=Website Inquiry from ${name}&body=Email: ${email}%0AProject: ${project}%0A%0A${message}`;
+      dbg.textContent = text;
+    }
+  
+    // Inline fallback cases (safe default)
+    const fallbackCases = [
+      {
+        "title": "Kubernetes Microservices Platform",
+        "summary": "Migrated & optimized Java/Node microservices using Kubernetes & Helm with automated blue-green deployments and autoscaling.",
+        "impact": "Downtime reduced by ~95%, release cycles became 4x faster."
+      },
+      {
+        "title": "CI/CD Automation for Multi-Stack Apps",
+        "summary": "Built end-to-end CI/CD with caching, automated tests, vulnerability scanning, and environment-based delivery.",
+        "impact": "Build time improved by 70% and deployments dropped from 20 mins to under 2 mins."
+      },
+      {
+        "title": "Cloud Cost Optimization",
+        "summary": "Optimized compute, storage, and autoscaling policies across AWS & GCP environments.",
+        "impact": "Achieved 32–38% cloud cost reduction without performance loss."
       }
-
-      form.addEventListener('submit', async function(e){
-        e.preventDefault();
-
-        const action = form.getAttribute('action');
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const project = form.project.value.trim();
-        const message = form.message.value.trim();
-
-        if (!name || !email){
-          status.textContent = "Please enter name & email.";
-          status.style.color = "#f6b1b1";
-          return;
-        }
-
-        if (!action || action.includes("your_form_id")){
-          status.textContent = "Form not configured — opening email…";
-          status.style.color = "var(--muted)";
-          setTimeout(()=> fallbackEmail(name,email,project,message), 600);
-          return;
-        }
-
-        sendBtn.disabled = true;
-        sendBtn.textContent = "Sending…";
-
-        try{
-          const formData = new FormData(form);
-          const resp = await fetch(action, {
-            method:"POST",
-            headers:{ "Accept":"application/json" },
-            body:formData
-          });
-          if (resp.ok){
-            status.textContent = "Message sent!";
-            status.style.color = "#90ee90";
-            form.reset();
-          } else {
-            status.textContent = "Error sending — try email.";
-            status.style.color = "#f6b1b1";
-          }
-        }catch(err){
-          status.textContent = "Network error — try again.";
-          status.style.color = "#f6b1b1";
-        }finally{
-          sendBtn.disabled = false;
-          sendBtn.textContent = "Send Message";
-        }
+    ];
+  
+    try {
+      showDebug('Loading cases.json...');
+      const resp = await fetch('/cases.json', { cache: 'no-store' });
+  
+      if (!resp.ok) {
+        console.warn('cases.json fetch returned non-OK:', resp.status, resp.statusText);
+        showDebug('cases.json load failed — using fallback');
+        renderCases(fallbackCases);
+        return;
+      }
+  
+      const data = await resp.json().catch(e => {
+        console.error('Error parsing cases.json:', e);
+        return null;
       });
-    })();
+  
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        console.warn('cases.json empty or invalid:', data);
+        showDebug('cases.json empty — using fallback');
+        renderCases(fallbackCases);
+        return;
+      }
+  
+      // success
+      renderCases(data);
+      showDebug(`Loaded ${data.length} case(s) from cases.json`);
+    } catch (err) {
+      console.error('Error fetching /cases.json:', err);
+      showDebug('Error loading cases.json — using fallback');
+      renderCases(fallbackCases);
+    }
+  
+    // Render helper
+    function renderCases(list) {
+      container.innerHTML = '';
+      list.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'case';
+        // ensure visible styling in case CSS overwritten
+        card.style.padding = '18px';
+        card.style.borderRadius = '12px';
+        card.style.background = 'linear-gradient(90deg, rgba(123,97,255,0.05), rgba(0,229,255,0.02))';
+        card.style.border = '1px solid rgba(123,97,255,0.05)';
+        card.style.color = '#e6f0f6';
+        card.style.lineHeight = '1.6';
+        card.innerHTML = `
+          <strong>${escapeHtml(c.title)}</strong>
+          <p style="margin:8px 0;color:var(--muted);">${escapeHtml(c.summary)}</p>
+          <p style="margin:6px 0;color:var(--accent-2);font-weight:700">${escapeHtml(c.impact || '')}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+  
+    function escapeHtml(s = '') {
+      return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+    }
+  })();
   </script>
+
+
 
 </body>
 </html>
