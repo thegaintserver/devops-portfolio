@@ -12,292 +12,169 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      /* Page colors */
-      --page-bg: #06070b;
-      --panel-bg: #071021;
-      --panel-accent: #071525;
-      --muted:#9aa6b2;
+  <script>
+  (function(){
+    // set year
+    const yearEl = document.getElementById('year');
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
   
-      /* Card / elevated style (Option 1) */
-      --card-bg: #0b1822;
-      --card-border: rgba(255,255,255,0.04);
-      --card-elev: 0 18px 60px rgba(2,6,12,0.9);
-      --card-radius: 14px;
-      --accent-edge: linear-gradient(180deg,#00e5ff,#7b61ff);
+    // load cases.json (with fallback) and render
+    (async function loadCases(){
+      const container = document.getElementById('caseList');
+      const fallback = [
+        {"title":"Kubernetes Microservices Platform","summary":"Migrated & optimized Java/Node microservices using K8s & Helm with automated blue-green deployments and autoscaling.","impact":"Downtime reduced by ~95%."},
+        {"title":"CI/CD Automation for Multi-Stack Apps","summary":"Built end-to-end CI/CD with caching, automated tests, vulnerability scanning and environment-based delivery.","impact":"Build time improved by 70%."},
+        {"title":"Cloud Cost Optimization","summary":"Optimized compute & autoscaling policies across AWS & GCP.","impact":"Saved 32–38% cloud cost."}
+      ];
   
-      /* Misc */
-      --accent:#00e5ff;
-      --accent-2:#7b61ff;
-      --panel-width: min(100vw - 36px, 1600px);
-      --panel-max:1600px;
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
-    }
-  
-    html,body{
-      height:100%;
-      margin:0;
-      background:var(--page-bg);
-      color:#e6f0f6;
-      -webkit-font-smoothing:antialiased;
-      overscroll-behavior-y:contain;
-      overflow-x: hidden;
-      line-height:1.5;
-    }
-  
-    /* fixed solid panel (center) */
-    .back-panel{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      top:0;
-      width:var(--panel-width);
-      max-width:var(--panel-max);
-      height:100vh;
-      background:linear-gradient(180deg,var(--panel-bg),var(--panel-accent));
-      border-radius:14px;
-      box-shadow:0 60px 160px rgba(2,6,12,0.88);
-      pointer-events:none;
-      z-index:1;
-      box-sizing: border-box;
-      overflow: hidden;
-    }
-  
-    /* content */
-    .page-wrap{
-      position: relative;
-      z-index: 2;
-      width: calc(var(--panel-width));
-      max-width: calc(var(--panel-width));
-      margin: 28px auto;
-      padding: 28px;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
-  
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:12px}
-  
-    .avatar-btn{width:72px;height:72px;border-radius:14px;overflow:hidden;border:2px solid rgba(0,229,255,0.22);box-shadow:0 12px 40px rgba(11,229,255,0.06);cursor:pointer;flex-shrink:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06))}
-    .avatar-btn img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
-  
-    h1{margin:0;font-size:24px}
-    p.lead{margin:6px 0 0;color:var(--muted);font-size:14.2px;max-width:760px}
-  
-    .nav-btn{text-decoration:none;color:#021825;padding:8px 12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(0,229,255,0.06)}
-    .nav-btn:hover{transform:translateY(-3px);filter:brightness(1.04)}
-  
-    /* ---------- SOLID ELEVATED CARD STYLES (Option 1) ---------- */
-    .card{
-      background: var(--card-bg);
-      color: #e9f6fb;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-elev);
-      border-radius: var(--card-radius);
-      padding: 20px;
-      transition: transform .14s ease, box-shadow .14s ease;
-      position: relative;
-      overflow: visible;
-      margin-bottom: 20px;
-    }
-  
-    .card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 28px 80px rgba(2,6,12,0.95);
-    }
-  
-    .card::before{
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      border-radius: var(--card-radius) 0 0 var(--card-radius);
-      background: var(--accent-edge);
-      opacity: 0.95;
-      pointer-events: none;
-    }
-  
-    @media (max-width:560px){
-      .card::before{width:3px}
-    }
-    /* ---------------------------------------------------------- */
-  
-    .top-grid {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 18px;
-      align-items: start;
-      margin-top: 18px;
-    }
-  
-    .skills-card {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      min-height: 220px;
-      box-sizing: border-box;
-      overflow: visible;
-      display: flex;
-      flex-direction: column;
-      align-self: start;
-      margin-bottom: 0;
-    }
-  
-    .accent-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;margin-bottom:10px}
-    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
-    .service{position:relative;padding:14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.02)}
-    .service h4{margin:0 0 6px;font-size:15px}
-    .service p{margin:0;color:var(--muted);font-size:14px}
-    .price{margin-top:8px;color:var(--accent-2);font-weight:800}
-  
-    .case-list{display:grid;gap:12px;margin-top:12px}
-    .case{padding:14px;border-radius:12px;background:linear-gradient(90deg,rgba(123,97,255,0.03),rgba(0,229,255,0.01));border:1px solid rgba(123,97,255,0.04)}
-    .case strong { color: #e9f6fb; font-size: 16px; display:block; }
-    .case p { color: var(--muted); margin: 8px 0 0; }
-    
-    input,textarea{border:1px solid rgba(255,255,255,0.06);background:rgba(5,9,12,0.12);color:#e6f0f6;padding:10px 12px;border-radius:10px;outline:none}
-    input:focus,textarea:focus{box-shadow:0 0 0 6px rgba(0,229,255,0.06);border-color:var(--accent)}
-    .btn-send{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;cursor:pointer}
-  
-    footer{text-align:center;margin-top:36px;color:var(--muted);font-size:13.5px;padding-bottom:36px}
-  
-    /* responsive */
-    @media (max-width:980px){
-      .top-grid { grid-template-columns: 1fr; }
-      .services-grid{grid-template-columns:1fr}
-      .avatar-btn{width:60px;height:60px}
-      .skills-card { max-width: 100%; min-height: auto; }
-    }
-    @media (max-width:560px){
-      h1{font-size:18px}
-      p.lead{font-size:13px}
-    }
-  
-    /* packages layout */
-    .services-order{display:flex;flex-direction:column;gap:18px}
-    .packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media (max-width:1100px){.packages-grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:700px){.packages-grid{grid-template-columns:1fr}}
-    .package-card{background:transparent;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-    .cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
-    .btn-small{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:700;cursor:pointer}
-  
-    /* ---------- CONTACT: stable layout & normal wrapping ---------- */
-    .contact-wrapper {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      box-sizing: border-box;
-    }
-  
-    /* Left info card: larger fixed column */
-    .contact-info-card {
-      background: transparent;
-      border-radius: 12px;
-      padding: 20px;
-      box-sizing: border-box;
-      border: 1px solid rgba(255,255,255,0.02);
-      flex: 0 0 520px;
-      min-width: 360px;
-      max-width: 58%;
-      word-break: normal;
-      overflow-wrap: break-word;
-    }
-  
-    /* Row layout: label + value column */
-    .contact-row{
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
-  
-    /* label fixed width */
-    .contact-row .label{
-      flex: 0 0 92px;
-      color: var(--muted);
-      font-size: 14px;
-      min-width: 80px;
-    }
-  
-    /* value column grows and is allowed to shrink (min-width:0 prevents overflowing flex children) */
-    .contact-row .value{
-      flex: 1 1 0%;
-      min-width: 0;
-      word-break: normal;
-      overflow-wrap: break-word;
-      white-space: normal;
-    }
-  
-    /* anchor inside value: normal inline text that wraps at word boundaries */
-    .contact-row .value a{
-      display: inline;
-      color: var(--accent);
-      font-weight: 700;
-      text-decoration: none;
-      word-break: normal;
-      overflow-wrap: break-word;
-      white-space: normal;
-    }
-  
-    /* Whatsapp quick button small */
-    .whatsapp-quick{
-      margin-left: 8px;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.04);
-      padding: 6px 10px;
-      border-radius: 8px;
-      color: #bfefff;
-      cursor: pointer;
-    }
-  
-    /* Right form card: smaller visually */
-    .contact-form-card {
-      background: transparent;
-      border-radius: 12px;
-      padding: 18px;
-      box-sizing: border-box;
-      border: 1px solid rgba(255,255,255,0.02);
-      flex: 1 1 260px;
-      min-width: 240px;
-      max-width: 42%;
-    }
-  
-    /* inputs keep full width inside the form card */
-    .contact-form-card input,
-    .contact-form-card textarea {
-      width: 100%;
-      box-sizing: border-box;
-    }
-  
-    .contact-form-actions{display:flex;gap:12px;align-items:center;margin-top:8px}
-    .btn-gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#051118;font-weight:700;padding:10px 18px;border-radius:12px;cursor:pointer}
-    .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
-    .form-status{margin-top:8px;color:var(--muted);font-size:13px}
-  
-    /* responsive: stack vertically on narrower screens */
-    @media (max-width:980px) {
-      .contact-wrapper { flex-direction: column; }
-      .contact-info-card, .contact-form-card {
-        width: 100% !important;
-        flex: 1 1 auto;
-        min-width: 0;
-        max-width: 100%;
+      function escapeHtml(s=''){
+        return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
       }
-      .contact-info-card { padding: 16px; }
-      .contact-form-card { padding: 16px; }
-      .whatsapp-quick{ margin-left:0 }
-    }
   
-    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    /* ---------------------------------------------------------- */
-  </style>
+      function render(list){
+        if(!container) return;
+        container.innerHTML = '';
+        list.forEach(c=>{
+          const el = document.createElement('div');
+          el.className = 'case';
+          el.innerHTML = `<strong>${escapeHtml(c.title)}</strong>
+                          <p>${escapeHtml(c.summary)}</p>
+                          <p style="color:var(--accent-2);font-weight:700;margin-top:8px">${escapeHtml(c.impact || '')}</p>`;
+          container.appendChild(el);
+        });
+      }
+  
+      try{
+        const resp = await fetch('/cases.json', { cache: 'no-store' });
+        if(!resp.ok){
+          // server returned non-200 — render fallback
+          return render(fallback);
+        }
+        const data = await resp.json().catch(()=>null);
+        render(Array.isArray(data) && data.length ? data : fallback);
+      }catch(err){
+        // network or other error — render fallback
+        render(fallback);
+      }
+    })();
+  
+    /* -----------------------------
+       Contact info & form behavior
+    ----------------------------- */
+    (function(){
+      const whatsappQuick = document.getElementById('whatsappQuickBtn');
+      whatsappQuick?.addEventListener('click', () => {
+        const text = encodeURIComponent("Hi Gourav, I found your portfolio and need quick DevOps help. Can we chat?");
+        window.open('https://wa.me/918875025888?text=' + text, '_blank');
+      });
+  
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      const sendBtn = document.getElementById('sendBtn');
+      const clearBtn = document.getElementById('clearBtn');
+  
+      function setStatus(msg, isError=false){
+        if(!status) return;
+        status.textContent = msg;
+        status.style.color = isError ? '#f6b1b1' : '#bfe6ff';
+      }
+  
+      clearBtn?.addEventListener('click', () => {
+        form?.reset();
+        setStatus('');
+      });
+  
+      if(!form) return;
+  
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        sendBtn.disabled = true;
+        setStatus('Sending...');
+  
+        const name = (form.querySelector('[name="name"]').value || '').trim();
+        const email = (form.querySelector('[name="email"]').value || '').trim();
+        const project = (form.querySelector('[name="project"]').value || '').trim();
+        const message = (form.querySelector('[name="message"]').value || '').trim();
+  
+        if(!name || !email){
+          setStatus('Please add your name and email.', true);
+          sendBtn.disabled = false;
+          return;
+        }
+  
+        const action = (form.getAttribute('action') || '').trim();
+        const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === '#';
+  
+        // helper to open mail client or Gmail fallback
+        async function tryOpenMailClient(){
+          setStatus('Form not configured — opening email client.');
+          const to = 'work@devopswithgourav.com';
+          const subject = encodeURIComponent(project || `DevOps inquiry from ${name}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject: ${project}\n\n${message}`);
+  
+          // Try native mailto first
+          try {
+            window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+            // allow some time
+            await new Promise(r => setTimeout(r, 700));
+          } catch (err) {
+            // continue to webmail fallback
+          }
+  
+          // Gmail compose fallback
+          try {
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=${encodeURIComponent(to)}&su=${subject}&body=${body}`;
+            const win = window.open(gmailUrl, '_blank');
+            if(!win){
+              setStatus('Unable to open mail client automatically. Please email: work@devopswithgourav.com', true);
+            } else {
+              setStatus('Opening email compose — please send the message from your mail client.');
+            }
+          } catch (e) {
+            setStatus('Unable to open email client — please email: work@devopswithgourav.com', true);
+          }
+        }
+  
+        // If there's a real form action, try POST to it:
+        if(!isPlaceholder){
+          try{
+            const resp = await fetch(action, {
+              method: form.method || 'POST',
+              headers: {'Accept': 'application/json'},
+              body: new FormData(form)
+            });
+            if(resp.ok){
+              setStatus('Thanks — message sent.');
+              form.reset();
+            } else {
+              // fallback
+              setStatus('Submission failed — falling back to email client.', true);
+              await tryOpenMailClient();
+            }
+          }catch(err){
+            setStatus('Submission failed — falling back to email client.', true);
+            await tryOpenMailClient();
+          } finally {
+            sendBtn.disabled = false;
+          }
+          return;
+        }
+  
+        // No real action configured — open mail client / webmail fallback
+        await tryOpenMailClient();
+        sendBtn.disabled = false;
+      });
+    })();
+  
+    // avatar preview stub (kept simple)
+    (function(){
+      const avatarBtn = document.getElementById('avatarBtn');
+      avatarBtn?.addEventListener('click', ()=>{ alert('Avatar preview'); });
+    })();
+  
+  })(); // close the top-level IIFE
+  </script>
+
 
 </head>
 <body>
