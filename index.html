@@ -85,21 +85,20 @@
     header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
 
-    /* rounded avatar + clickable */
+    /* avatar */
     .avatar-btn{width:72px;height:72px;border-radius:14px;overflow:hidden;border:2px solid rgba(0,229,255,0.22);box-shadow:0 12px 40px rgba(11,229,255,0.06);cursor:pointer;flex-shrink:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06))}
     .avatar-btn img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
 
     h1{margin:0;font-size:24px}
     p.lead{margin:6px 0 0;color:var(--muted);font-size:14.2px;max-width:760px;line-height:1.45}
 
-    /* nav */
     .nav-btn{text-decoration:none;color:#021825;padding:8px 12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(0,229,255,0.06)}
     .nav-btn:hover{transform:translateY(-3px);filter:brightness(1.04)}
 
     /* card common */
     .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:20px}
 
-    /* TOP GRID: left flexible (auto) | right remaining */
+    /* TOP GRID */
     .top-grid {
       display: grid;
       grid-template-columns: 360px 1fr;
@@ -108,31 +107,12 @@
       margin-top: 18px;
     }
 
-    .skills-card {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      min-height: 220px;
-      box-sizing: border-box;
-      overflow: visible;
-      display: flex;
-      flex-direction: column;
-      align-self: start;
-      margin-bottom: 0;
-    }
-
-    .skills-card::after { z-index: -1; }
+    .skills-card { position: relative; width:100%; max-width:360px; min-height:220px; display:flex; flex-direction:column; }
 
     .skills-card h3{margin:0 0 8px}
     .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
 
-    .skill-list{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:6px;
-      align-items:center;
-    }
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;align-items:center}
     .skill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
     .skill .years{color:var(--muted);font-weight:700;font-size:12px}
     .skill { white-space: normal; max-width: 220px; }
@@ -142,8 +122,6 @@
     .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
 
     .service{position:relative;padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
-    .service::before{content:"";position:absolute;left:12px;right:12px;top:-10px;height:6px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0;transform:translateY(-3px);transition:opacity .16s,transform .16s}
-    .service:hover::before{opacity:1;transform:translateY(0)}
     .service h4{margin:0 0 6px;font-size:15px}
     .service p{margin:0;color:var(--muted);font-size:14px}
     .price{margin-top:8px;color:var(--accent-2);font-weight:800}
@@ -162,7 +140,7 @@
     .avatar-modal img{width:100%;height:auto;border-radius:8px;display:block}
     .avatar-close{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer}
 
-    /* Responsive */
+    /* Responsive adjustments */
     @media (max-width:980px){
       .top-grid { grid-template-columns: 1fr; }
       .services-grid{grid-template-columns:1fr}
@@ -175,55 +153,56 @@
     }
 
     /* ----------------------
-       Contact / Hire-me styles
+       Contact: two-card layout
        ---------------------- */
-    .contact-card{
+    .contact-wrapper{
       display:flex;
-      gap:24px;
+      gap:18px;
       align-items:flex-start;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;
-      padding:20px;
-      box-shadow:0 6px 30px rgba(0,0,0,0.45);
-      box-sizing:border-box;
-      margin-bottom:20px;
+      margin-top:12px;
       flex-wrap:wrap;
     }
-    .contact-left{flex:0 0 300px;min-width:240px}
-    .contact-right{flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px}
 
-    .contact-left h3{margin:0 0 6px}
-    .contact-left .subtitle{color:var(--muted);font-size:14px;margin:0 0 12px}
-    .contact-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
-    .contact-list a{color:var(--accent);text-decoration:none;font-weight:700}
-    .contact-row{display:flex;align-items:center;gap:8px}
+    .contact-info-card, .contact-form-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.45);
+      box-sizing:border-box;
+    }
+
+    .contact-info-card{flex:0 0 320px; min-width:260px}
+    .contact-form-card{flex:1; min-width:300px}
+
+    .contact-info-card h3, .contact-form-card h3{margin:0 0 8px}
+    .contact-info-card .subtitle{color:var(--muted);font-size:14px;margin:0 0 12px}
+
+    .contact-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .contact-row .label{min-width:92px;color:var(--muted);font-size:14px}
+    .contact-row a{color:var(--accent);font-weight:700;text-decoration:none}
     .whatsapp-quick{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;color:#bfefff;cursor:pointer}
 
-    .contact-right input,.contact-right textarea{
+    .contact-form-card .row{display:flex;gap:12px}
+    .contact-form-card input,.contact-form-card textarea{
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
       border:1px solid rgba(255,255,255,0.04); color:#e7f6ff;
       padding:12px 14px; border-radius:10px; outline:none; width:100%;
       font-size:14px;
     }
-    .contact-right .row{display:flex;gap:12px}
-    .contact-right .row input{flex:1}
-    .actions{display:flex;gap:12px;align-items:center;margin-top:6px}
-    .btn-gradient{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border:none;color:#051118;font-weight:700;padding:10px 18px;border-radius:12px;cursor:pointer;
-    }
-    .btn-secondary{
-      background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer;
-    }
+
+    .contact-form-actions{display:flex;gap:12px;align-items:center;margin-top:8px}
+    .btn-gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#051118;font-weight:700;padding:10px 18px;border-radius:12px;cursor:pointer}
+    .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
     .form-status{margin-top:8px;color:var(--muted);font-size:13px}
 
     @media (max-width:880px){
-      .contact-card{flex-direction:column}
-      .contact-left{width:100%}
+      .contact-wrapper{flex-direction:column}
+      .contact-info-card{width:100%}
+      .contact-form-card{width:100%}
       .whatsapp-quick{margin-left:0}
     }
 
-    /* visually hidden for accessibility */
+    /* tiny utility */
     .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
@@ -252,7 +231,6 @@
 
     <!-- top grid: skills (left) + services (right) -->
     <section class="top-grid" id="skills">
-      <!-- SKILLS: flexible width follows content, auto height -->
       <aside class="skills-card" role="complementary" aria-labelledby="skills-title">
         <h3 id="skills-title" style="margin-top:0">Skills & Expertise</h3>
         <p class="desc">Sr. DevOps engineer with 6 years of experience across cloud platforms, automation, monitoring, scaling and production-grade deployments.</p>
@@ -279,7 +257,6 @@
         </div>
       </aside>
 
-      <!-- SERVICES: right column -->
       <div class="services-col">
         <section id="services" class="card">
           <p class="accent-pill">DevOps for Startups</p>
@@ -333,55 +310,62 @@
       <div id="caseList" class="case-list"></div>
     </section>
 
-    <!-- Contact (updated) -->
-    <section id="contact" class="card contact-card" aria-labelledby="contactTitle">
-      <div class="contact-left">
-        <h3 id="contactTitle" style="margin-top:0">Contact Me</h3>
-        <p class="subtitle">Fast response · Evening & weekend availability</p>
+    <!-- CONTACT area: two separate cards -->
+    <section id="contact" aria-labelledby="contactMainTitle">
+      <h2 id="contactMainTitle" style="margin:0 0 10px">Contact</h2>
 
-        <ul class="contact-list" aria-label="contact methods">
-          <li class="contact-row">
-            <span style="color:var(--muted);min-width:86px">WhatsApp:</span>
+      <div class="contact-wrapper">
+        <!-- Left: Contact Info Card -->
+        <div class="contact-info-card" role="region" aria-labelledby="contactInfoTitle">
+          <h3 id="contactInfoTitle" style="margin-top:0">Contact Me</h3>
+          <p class="subtitle">Fast response · Evening & weekend availability</p>
+
+          <div class="contact-row">
+            <div class="label">WhatsApp:</div>
             <a href="https://wa.me/918875025888" target="_blank" rel="noopener">+91 8875025888</a>
-            <button class="whatsapp-quick" id="whatsappQuickBtn" title="Send quick message on WhatsApp">Message</button>
-          </li>
+            <button class="whatsapp-quick" id="whatsappQuickBtn">Message</button>
+          </div>
 
-          <li class="contact-row">
-            <span style="color:var(--muted);min-width:86px">Email:</span>
+          <div class="contact-row">
+            <div class="label">Email:</div>
             <a href="mailto:work@devopswithgourav.com">work@devopswithgourav.com</a>
-          </li>
+          </div>
 
-          <li class="contact-row">
-            <span style="color:var(--muted);min-width:86px">LinkedIn:</span>
+          <div class="contact-row">
+            <div class="label">LinkedIn:</div>
             <a href="https://www.linkedin.com/in/gouravsaini" target="_blank" rel="noopener">gouravsaini</a>
-          </li>
-        </ul>
+          </div>
 
-        <p class="small-note" style="margin-top:12px;color:var(--muted)">Prefer a short call? Book a 15-min slot on <a href="#" id="calendly" style="color:var(--accent)">Calendly</a>.</p>
+          <p style="margin-top:12px;color:var(--muted)">Prefer a short call? Book a 15-min slot on <a href="#" id="calendly" style="color:var(--accent)">Calendly</a>.</p>
+        </div>
+
+        <!-- Right: Contact Form Card -->
+        <div class="contact-form-card" role="form" aria-labelledby="contactFormTitle">
+          <h3 id="contactFormTitle" style="margin-top:0">Send a message</h3>
+
+          <form id="contactForm" action="https://formspree.io/f/xiiiiiig" method="POST" novalidate>
+            <div class="row" style="margin-bottom:10px">
+              <label class="sr-only" for="cf_name">Your name</label>
+              <input id="cf_name" name="name" type="text" placeholder="Your name" required />
+
+              <label class="sr-only" for="cf_email">Your email</label>
+              <input id="cf_email" name="email" type="email" placeholder="Your email" required />
+            </div>
+
+            <label class="sr-only" for="cf_project">Project short description</label>
+            <input id="cf_project" name="project" type="text" placeholder="Project short description" style="margin-bottom:10px" />
+
+            <label class="sr-only" for="cf_message">More details</label>
+            <textarea id="cf_message" name="message" rows="5" placeholder="More details (stack, timeline, budget)"></textarea>
+
+            <div class="contact-form-actions">
+              <button type="submit" class="btn-gradient" id="sendBtn">Send Message</button>
+              <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
+              <div id="formStatus" class="form-status" aria-live="polite"></div>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <form id="contactForm" class="contact-right" action="https://formspree.io/f/xiiiiiig" method="POST" novalidate>
-        <div class="row">
-          <label class="sr-only" for="name">Your name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
-
-          <label class="sr-only" for="email">Your email</label>
-          <input id="email" name="email" type="email" placeholder="Your email" required />
-        </div>
-
-        <label class="sr-only" for="project">Project short description</label>
-        <input id="project" name="project" type="text" placeholder="Project short description" />
-
-        <label class="sr-only" for="message">More details</label>
-        <textarea id="message" name="message" rows="4" placeholder="More details (stack, timeline, budget)"></textarea>
-
-        <div class="actions" style="margin-top:6px">
-          <button type="submit" class="btn-gradient" id="sendBtn">Send Message</button>
-          <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
-        </div>
-
-        <p id="formStatus" class="form-status" aria-live="polite"></p>
-      </form>
     </section>
 
     <footer>© <span id="year"></span> Gourav Saini — Built in India 🇮🇳</footer>
@@ -397,7 +381,7 @@
     </div>
   </div>
 
-  <!-- Combined JS: cases loader, enhanced contact handling, whatsapp quick, avatar modal -->
+  <!-- JS: cases loader, contact handling, whatsapp quick, avatar modal -->
   <script>
   (function(){
     // year
@@ -433,27 +417,26 @@
     })();
 
     /* -----------------------------
-       Contact form handling (enhanced)
-       - Uses action attribute if provided (Formspree or your endpoint).
-       - If action is missing/placeholder, falls back to mailto: with prefilled body.
-       ----------------------------- */
+       Contact info & form behavior
+    ----------------------------- */
     (function(){
+      // WhatsApp quick
+      const whatsappQuick = document.getElementById('whatsappQuickBtn');
+      whatsappQuick?.addEventListener('click', () => {
+        const text = encodeURIComponent("Hi Gourav, I found your portfolio and need quick DevOps help. Can we chat?");
+        window.open('https://wa.me/918875025888?text=' + text, '_blank');
+      });
+
+      // Form handling (separate form elements with unique IDs)
       const form = document.getElementById('contactForm');
       const status = document.getElementById('formStatus');
       const sendBtn = document.getElementById('sendBtn');
       const clearBtn = document.getElementById('clearBtn');
-      const whatsappQuick = document.getElementById('whatsappQuickBtn');
 
       function setStatus(msg, isError=false){
         status.textContent = msg;
         status.style.color = isError ? '#f6b1b1' : '#bfe6ff';
       }
-
-      // WhatsApp quick button
-      whatsappQuick?.addEventListener('click', () => {
-        const text = encodeURIComponent("Hi Gourav, I found your portfolio and need quick DevOps help. Can we chat?");
-        window.open('https://wa.me/918875025888?text=' + text, '_blank');
-      });
 
       clearBtn?.addEventListener('click', () => {
         form.reset();
@@ -465,10 +448,10 @@
         sendBtn.disabled = true;
         setStatus('Sending...');
 
-        const name = (form.name.value || '').trim();
-        const email = (form.email.value || '').trim();
-        const project = (form.project.value || '').trim();
-        const message = (form.message.value || '').trim();
+        const name = (form.querySelector('[name="name"]').value || '').trim();
+        const email = (form.querySelector('[name="email"]').value || '').trim();
+        const project = (form.querySelector('[name="project"]').value || '').trim();
+        const message = (form.querySelector('[name="message"]').value || '').trim();
 
         if(!name || !email){
           setStatus('Please add your name and email.', true);
@@ -480,7 +463,6 @@
         const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === '#';
 
         if(!isPlaceholder){
-          // try to POST to the provided action (Formspree supports form POST)
           try{
             const resp = await fetch(action, {
               method: form.method || 'POST',
@@ -491,7 +473,6 @@
               setStatus('Thanks — message sent.');
               form.reset();
             } else {
-              // Some endpoints return 200 but not ok — try to parse message
               const json = await resp.json().catch(()=>null);
               if(json && (json.ok || json.success)) {
                 setStatus('Thanks — message sent.');
@@ -502,7 +483,6 @@
             }
           }catch(err){
             setStatus('Submission failed — opening mail client as fallback.', true);
-            // fallback to mailto after a short delay
             setTimeout(()=>openMailto(), 600);
           } finally {
             sendBtn.disabled = false;
@@ -510,7 +490,7 @@
           return;
         }
 
-        // placeholder or missing form endpoint -> mailto fallback
+        // mailto fallback
         openMailto();
         sendBtn.disabled = false;
 
@@ -521,18 +501,15 @@
           window.location.href = `mailto:work@devopswithgourav.com?subject=${subject}&body=${body}`;
         }
       });
-
     })();
 
-    // avatar modal behavior
+    // avatar modal behavior (unchanged)
     const avatarBtn = document.getElementById('avatarBtn');
     const avatarModal = document.getElementById('avatarModal');
     const closeAvatar = document.getElementById('closeAvatar');
     avatarBtn && avatarBtn.addEventListener('click', ()=>{ avatarModal.classList.add('open'); avatarModal.setAttribute('aria-hidden','false'); });
     closeAvatar && closeAvatar.addEventListener('click', ()=>{ avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); });
     avatarModal && avatarModal.addEventListener('click', (e)=>{ if(e.target === avatarModal) { avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); } });
-
-    // keyboard close (esc)
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); } });
 
   })();
