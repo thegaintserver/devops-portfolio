@@ -341,50 +341,54 @@
     <section id="contact" class="card" aria-labelledby="contactMainTitle">
       <h3 id="contactMainTitle" style="margin-top:0">Contact</h3>
       <p style="color:var(--muted)">Fast response · Evening & weekend availability</p>
-
+    
       <div class="contact-wrapper">
-        <!-- Left: Contact Info Card -->
+        <!-- Left: Contact Info Card (wider now) -->
         <div class="contact-info-card" role="region" aria-labelledby="contactInfoTitle">
           <h4 id="contactInfoTitle" style="margin-top:0">Contact Me</h4>
-
+    
           <div class="contact-row">
             <div class="label">WhatsApp:</div>
             <a href="https://wa.me/918875025888" target="_blank" rel="noopener">+91 8875025888</a>
             <button class="whatsapp-quick" id="whatsappQuickBtn">Message</button>
           </div>
-
+    
           <div class="contact-row">
             <div class="label">Email:</div>
             <a href="mailto:work@devopswithgourav.com">work@devopswithgourav.com</a>
           </div>
-
+    
           <div class="contact-row">
             <div class="label">LinkedIn:</div>
             <a href="https://www.linkedin.com/in/gouravsaini" target="_blank" rel="noopener">gouravsaini</a>
           </div>
-
-          <p style="margin-top:12px;color:var(--muted)">Prefer a short call? Book a 15-min slot on <a href="#" id="calendly" style="color:var(--accent)">Calendly</a>.</p>
+    
+          <p style="margin-top:12px;color:var(--muted)">Prefer a short call? Book a 15-min slot on
+            <!-- if you don't have calendly link yet, keep "#" and replace later -->
+            <a href="#" id="calendlyLink" style="color:var(--accent);text-decoration:underline">Calendly</a>.
+          </p>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">Or click <button id="calendlyPopupBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;cursor:pointer;color:#bfefff">Schedule</button> to open scheduler.</div>
         </div>
-
-        <!-- Right: Contact Form Card -->
+    
+        <!-- Right: Contact Form Card (smaller) -->
         <div class="contact-form-card" role="form" aria-labelledby="contactFormTitle">
           <h4 id="contactFormTitle" style="margin-top:0">Send a message</h4>
-
+    
           <form id="contactForm" action="https://formspree.io/f/xiiiiiig" method="POST" novalidate>
             <div style="display:flex;gap:10px;margin-bottom:10px;">
               <label class="sr-only" for="cf_name">Your name</label>
               <input id="cf_name" name="name" type="text" placeholder="Your name" required>
-
+    
               <label class="sr-only" for="cf_email">Your email</label>
               <input id="cf_email" name="email" type="email" placeholder="Your email" required>
             </div>
-
+    
             <label class="sr-only" for="cf_project">Project short description</label>
             <input id="cf_project" name="project" type="text" placeholder="Project short description" style="margin-bottom:10px">
-
+    
             <label class="sr-only" for="cf_message">More details</label>
             <textarea id="cf_message" name="message" rows="5" placeholder="More details (stack, timeline, budget)"></textarea>
-
+    
             <div class="contact-form-actions">
               <button type="submit" class="btn-gradient" id="sendBtn">Send Message</button>
               <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
@@ -394,6 +398,7 @@
         </div>
       </div>
     </section>
+
 
     <footer>© <span id="year"></span> Gourav Saini — Built in India 🇮🇳</footer>
   </div>
