@@ -14,17 +14,11 @@
 
   <style>
     :root{
-      --bg:#05060a;
-      --panel:#071021;
-      --panel-accent:#071525;
-      --muted:#9aa6b2;
-      --accent:#00e5ff;
-      --accent-2:#7b61ff;
-      --card-shadow:0 18px 60px rgba(2,6,12,0.72);
-      --panel-width: min(100vw - 36px, 1600px);
-      --panel-max:1600px;
-      --radius:12px;
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
+      --panel-bg: #06090d;
+      --glass-card: rgba(18,24,30,0.78);
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-shadow: 0 20px 60px rgba(2,6,12,0.9);
+      --edge: linear-gradient(180deg,#00e5ff,#7b61ff);
     }
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02030a);color:#e6f0f6;overflow-x:hidden}
     .back-panel{position:fixed;left:50%;transform:translateX(-50%);top:0;width:var(--panel-width);max-width:var(--panel-max);height:100vh;background:linear-gradient(180deg,var(--panel),var(--panel-accent));border-radius:14px;box-shadow:0 60px 160px rgba(2,6,12,0.88);pointer-events:none;z-index:1;box-sizing:border-box;overflow:hidden}
@@ -36,7 +30,27 @@
     h1{margin:0;font-size:24px}
     p.lead{margin:6px 0 0;color:var(--muted);font-size:14.2px;max-width:760px;line-height:1.45}
     .nav-btn{text-decoration:none;color:#021825;padding:8px 12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(0,229,255,0.06)}
-    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-bottom:20px}
+    .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+    backdrop-filter: blur(6px) saturate(110%);
+    -webkit-backdrop-filter: blur(6px) saturate(110%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    }
+    .card::after{
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 54px;
+      height: 6px;
+      border-radius:6px;
+      background: var(--edge);
+      opacity:0.95;
+    }
     .top-grid{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start;margin-top:18px}
     .skills-card{position:relative;width:100%;max-width:360px;min-height:220px;display:flex;flex-direction:column}
     .services-col{}
