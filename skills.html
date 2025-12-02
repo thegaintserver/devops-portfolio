@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skills — Gourav Saini — DevOps</title>
+  <meta name="description" content="Skills & experience — Gourav Saini DevOps engineer.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#05060a;
+      --panel:#071021;
+      --panel-accent:#071525;
+      --muted:#9aa6b2;
+      --accent:#00e5ff;
+      --accent-2:#7b61ff;
+      --card-shadow:0 18px 60px rgba(2,6,12,0.72);
+      --panel-width: min(100vw - 36px, 1400px);
+      --radius:12px;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02030a);color:#e6f0f6;overflow-x:hidden}
+    .page{max-width:calc(var(--panel-width));margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:10px;overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .nav{display:flex;gap:8px}
+    .nav a{padding:8px 12px;border-radius:10px;text-decoration:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:700}
+    h1{margin:0}
+    .intro{margin-top:12px;color:var(--muted)}
+    /* layout */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;align-items:start}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:var(--card-shadow);min-height:120px}
+    .card h3{margin:0 0 8px}
+    .skill-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .badge{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:999px;font-weight:600;font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
+    .years{color:var(--muted);font-weight:700;font-size:12px}
+    /* Hire Me card */
+    .hire-card{display:flex;flex-direction:column;gap:10px}
+    .contact-row{display:flex;align-items:center;gap:8px}
+    .label{min-width:90px;color:var(--muted)}
+    .contact-row a{color:var(--accent);font-weight:700}
+    .btn{padding:10px 14px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;cursor:pointer}
+    .form{display:flex;flex-direction:column;gap:10px}
+    .form input,.form textarea{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.16);color:#e6f0f6}
+    .form .row{display:flex;gap:8px}
+    .form .row input{flex:1}
+    .form-status{color:var(--muted);font-size:13px}
+    footer{margin-top:28px;color:var(--muted);text-align:center}
+
+    @media (max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}}
+    @media (max-width:520px){header{flex-direction:column;align-items:flex-start;gap:10px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="avatar"><img src="avatar.jpeg" alt="Gourav"></div>
+        <div>
+          <h1>Gourav Saini — Skills & Experience</h1>
+          <div style="color:var(--muted);font-size:13px">Detailed, year-wise experience across cloud, CI/CD, automation and monitoring.</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="#hire">Hire Me</a>
+      </nav>
+    </header>
+
+    <p class="intro">This page lists my main skills and an approximate year-wise experience for each technology. Cards are grouped for clarity; on small screens the grid stacks into a single column.</p>
+
+    <!-- Skills grid grouped by category -->
+    <div class="grid" role="list">
+      <!-- Cloud & Platforms -->
+      <div class="card" role="listitem" aria-labelledby="cloudTitle">
+        <h3 id="cloudTitle">Cloud & Platforms</h3>
+        <div class="skill-badges">
+          <div class="badge">AWS <span class="years">6y</span></div>
+          <div class="badge">GCP <span class="years">2.5y</span></div>
+          <div class="badge">Azure <span class="years">1.5y</span></div>
+          <div class="badge">Genie ACS <span class="years">1.5y</span></div>
+          <div class="badge">Firebase <span class="years">—</span></div>
+        </div>
+      </div>
+
+      <!-- CI/CD & Orchestration -->
+      <div class="card" role="listitem" aria-labelledby="cicdTitle">
+        <h3 id="cicdTitle">CI/CD & Orchestration</h3>
+        <div class="skill-badges">
+          <div class="badge">Jenkins <span class="years">6y</span></div>
+          <div class="badge">Git / GitHub / Bitbucket <span class="years">6y</span></div>
+          <div class="badge">Terraform <span class="years">2y</span></div>
+          <div class="badge">Ansible <span class="years">3y</span></div>
+          <div class="badge">Chef <span class="years">1y</span></div>
+        </div>
+      </div>
+
+      <!-- Containers & Orchestration -->
+      <div class="card" role="listitem" aria-labelledby="containersTitle">
+        <h3 id="containersTitle">Containers & Kubernetes</h3>
+        <div class="skill-badges">
+          <div class="badge">Docker <span class="years">5y</span></div>
+          <div class="badge">Kubernetes <span class="years">3y</span></div>
+          <div class="badge">Helm <span class="years">—</span></div>
+        </div>
+      </div>
+
+      <!-- Monitoring & Logging -->
+      <div class="card" role="listitem" aria-labelledby="monitorTitle">
+        <h3 id="monitorTitle">Monitoring & Observability</h3>
+        <div class="skill-badges">
+          <div class="badge">Grafana <span class="years">5y</span></div>
+          <div class="badge">Prometheus <span class="years">5y</span></div>
+          <div class="badge">Datadog <span class="years">3y</span></div>
+          <div class="badge">CloudWatch <span class="years">5y</span></div>
+        </div>
+      </div>
+
+      <!-- Scripting & OS -->
+      <div class="card" role="listitem" aria-labelledby="scriptTitle">
+        <h3 id="scriptTitle">Scripting & OS</h3>
+        <div class="skill-badges">
+          <div class="badge">Linux <span class="years">7y</span></div>
+          <div class="badge">Shell scripting <span class="years">6y</span></div>
+          <div class="badge">PowerShell <span class="years">2y</span></div>
+        </div>
+      </div>
+
+      <!-- Web / Servers -->
+      <div class="card" role="listitem" aria-labelledby="webTitle">
+        <h3 id="webTitle">Web Servers & CMS</h3>
+        <div class="skill-badges">
+          <div class="badge">Apache / Nginx <span class="years">6y</span></div>
+          <div class="badge">Strapi <span class="years">1.5y</span></div>
+          <div class="badge">Qlik Sense <span class="years">2y</span></div>
+        </div>
+      </div>
+
+      <!-- Networking & Other -->
+      <div class="card" role="listitem" aria-labelledby="otherTitle">
+        <h3 id="otherTitle">Networking & Other</h3>
+        <div style="color:var(--muted);font-size:13px">Experience in networking setup and management (VPCs, routing, load balancers, firewall rules).</div>
+        <div class="skill-badges" style="margin-top:10px">
+          <div class="badge">Networking (VPC,LB,routing) <span class="years">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional full list (searchable at glance) -->
+    <section style="margin-top:18px" class="card">
+      <h3 style="margin-top:0">All skills (with years)</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+        <!-- Use the list the user provided exactly -->
+        <div class="badge">Strapi <span class="years">1.5y</span></div>
+        <div class="badge">Jenkins <span class="years">6y</span></div>
+        <div class="badge">Git/Github/Bitbucket <span class="years">6y</span></div>
+        <div class="badge">Genie ACS <span class="years">1.5y</span></div>
+        <div class="badge">Qlik Sense <span class="years">2y</span></div>
+        <div class="badge">AWS <span class="years">6y</span></div>
+        <div class="badge">Azure cloud <span class="years">1.5y</span></div>
+        <div class="badge">GCP <span class="years">2.5y</span></div>
+        <div class="badge">Linux <span class="years">7y</span></div>
+        <div class="badge">Terraform <span class="years">2y</span></div>
+        <div class="badge">Ansible <span class="years">3y</span></div>
+        <div class="badge">Chef <span class="years">1y</span></div>
+        <div class="badge">Grafana <span class="years">5y</span></div>
+        <div class="badge">Prometheus <span class="years">5y</span></div>
+        <div class="badge">Datadog <span class="years">3y</span></div>
+        <div class="badge">Cloudwatch <span class="years">5y</span></div>
+        <div class="badge">Networking setup & management</div>
+        <div class="badge">Shell script <span class="years">6y</span></div>
+        <div class="badge">Powershell <span class="years">2y</span></div>
+        <div class="badge">Docker <span class="years">5y</span></div>
+        <div class="badge">Kubernetes <span class="years">3y</span></div>
+        <div class="badge">Apache / Nginx <span class="years">6y</span></div>
+      </div>
+    </section>
+
+    <!-- Hire Me (Contact) card -->
+    <section id="hire" class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">Hire Me — Contact</h3>
+      <div class="hire-card">
+        <div style="color:var(--muted)">Fast response · Evening & weekend availability</div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:18px">
+          <!-- Contact info column -->
+          <div style="min-width:260px;flex:1 1 300px">
+            <div class="contact-row"><div class="label">WhatsApp:</div><a href="https://wa.me/918875025888" target="_blank" rel="noopener">+91 8875025888</a></div>
+            <div class="contact-row"><div class="label">Email:</div><a href="mailto:work@devopswithgourav.com">work@devopswithgourav.com</a></div>
+            <div class="contact-row"><div class="label">LinkedIn:</div><a href="https://www.linkedin.com/in/gouravsaini" target="_blank" rel="noopener">gouravsaini</a></div>
+            <div style="margin-top:8px;color:var(--muted);font-size:13px">Prefer a short call? Book a 15-min slot on <a href="#" style="color:var(--accent)">Calendly</a>.</div>
+          </div>
+
+          <!-- Contact form column -->
+          <div style="min-width:280px;flex:1 1 420px">
+            <form id="hireForm" class="form" action="https://formspree.io/f/xiiiiiig" method="POST" novalidate>
+              <div class="row">
+                <input id="h_name" name="name" placeholder="Your name" required>
+                <input id="h_email" name="email" type="email" placeholder="Your email" required>
+              </div>
+              <input id="h_project" name="project" placeholder="Project short description">
+              <textarea id="h_message" name="message" rows="4" placeholder="More details (stack, timeline, budget)"></textarea>
+
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="submit" class="btn">Send Message</button>
+                <button type="button" id="h_clear" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">Clear</button>
+                <div id="h_formStatus" class="form-status" aria-live="polite" style="margin-left:8px"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Gourav Saini — Built in India 🇮🇳</footer>
+  </div>
+
+  <script>
+  (function(){
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hire form handling (simple Formspree + mailto fallback)
+    (function(){
+      const form = document.getElementById('hireForm');
+      const status = document.getElementById('h_formStatus');
+      const clearBtn = document.getElementById('h_clear');
+
+      clearBtn.addEventListener('click', ()=>{ form.reset(); status.textContent=''; });
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        status.textContent = 'Sending...';
+        const name = (form.name.value||'').trim();
+        const email = (form.email.value||'').trim();
+        const project = (form.project.value||'').trim();
+        const message = (form.message.value||'').trim();
+
+        if(!name || !email){ status.textContent = 'Please enter name and email.'; status.style.color = '#f6b1b1'; return; }
+
+        const action = (form.getAttribute('action')||'').trim();
+        const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === '#';
+
+        if(!isPlaceholder){
+          try{
+            const resp = await fetch(action,{method:form.method||'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
+            if(resp.ok){
+              status.textContent = 'Thanks — message sent.';
+              form.reset();
+            } else {
+              status.textContent = 'Submission failed — try email.';
+              status.style.color = '#f6b1b1';
+            }
+          }catch(err){
+            status.textContent = 'Network error — try email or WhatsApp.';
+            status.style.color = '#f6b1b1';
+          }
+          return;
+        }
+
+        // mailto fallback
+        const subject = encodeURIComponent(project || 'DevOps inquiry from portfolio');
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject: ${project}\n\n${message}`);
+        window.location.href = `mailto:work@devopswithgourav.com?subject=${subject}&body=${body}`;
+      });
+    })();
+  })();
+  </script>
+</body>
+</html>
