@@ -553,21 +553,22 @@
           e.preventDefault();
           sendBtn.disabled = true;
           setStatus('Sending...');
-
+        
           const name = (form.querySelector('[name="name"]').value || '').trim();
           const email = (form.querySelector('[name="email"]').value || '').trim();
           const project = (form.querySelector('[name="project"]').value || '').trim();
           const message = (form.querySelector('[name="message"]').value || '').trim();
-
+        
           if(!name || !email){
             setStatus('Please add your name and email.', true);
             sendBtn.disabled = false;
             return;
           }
-
+        
           const action = (form.getAttribute('action') || '').trim();
           const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === '#';
-
+        
+          // If there's a real form action, try POST to it:
           if(!isPlaceholder){
             try{
               const resp = await fetch(action, {
@@ -579,63 +580,58 @@
                 setStatus('Thanks — message sent.');
                 form.reset();
               } else {
-                const json = await resp.json().catch(()=>null);
-                if(json && (json.ok || json.success)) {
-                  setStatus('Thanks — message sent.');
-                  form.reset();
-                } else {
-                  throw new Error('Submission failed');
-                }
+                // If remote fails, fall back to mailto flow
+                setStatus('Submission failed — falling back to email client.', true);
+                await tryOpenMailClient();
               }
             }catch(err){
-              setStatus('Submission failed — opening mail client as fallback.', true);
-              setTimeout(()=>openMailto(), 600);
+              setStatus('Submission failed — falling back to email client.', true);
+              await tryOpenMailClient();
             } finally {
               sendBtn.disabled = false;
             }
             return;
           }
-
-          // mailto fallback
-          openMailto();
+        
+          // No real action configured — open mail client / webmail fallback
+          await tryOpenMailClient();
           sendBtn.disabled = false;
-
-          function openMailto(){
+        
+          // --- helper to open mail client or Gmail fallback ---
+          async function tryOpenMailClient(){
             setStatus('Form not configured — opening email client.');
-            const subject = encodeURIComponent(project || 'DevOps inquiry from portfolio');
+            const to = 'work@devopswithgourav.com';
+            const subject = encodeURIComponent(project || `DevOps inquiry from ${name}`);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject: ${project}\n\n${message}`);
-            window.location.href = `mailto:work@devopswithgourav.com?subject=${subject}&body=${body}`;
+        
+            // Try native mailto first
+            try {
+              // Try window.location first (works in most browsers when a native client is configured)
+              window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+              // Give native client a moment to open — some browsers will succeed silently
+              await new Promise(r => setTimeout(r, 700));
+            } catch (err) {
+              // ignore — fall through to Gmail fallback
+            }
+        
+            // After attempt, ensure webmail fallback — open Gmail compose in new tab
+            // This helps users who use Gmail web client (most common)
+            try {
+              const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=${encodeURIComponent(to)}&su=${subject}&body=${body}`;
+              // open in new tab/window. If blocked, browser will prompt user.
+              const win = window.open(gmailUrl, '_blank');
+              if(!win){
+                // popup blocked — tell user
+                setStatus('Unable to open mail client automatically. Please email: work@devopswithgourav.com', true);
+              } else {
+                setStatus('Opening email compose — please send the message from your mail client.');
+              }
+            } catch (e) {
+              setStatus('Unable to open email client — please email: work@devopswithgourav.com', true);
+            }
           }
-        });
-      })();
+});
 
-      // Calendly popup handling (uses a link placeholder — replace with your Calendly URL)
-      (function(){
-        const calendlyLink = document.getElementById('calendlyLink');
-        const calendlyPopupBtn = document.getElementById('calendlyPopupBtn');
-        const calendlyUrl = 'https://calendly.com/YOUR_CALENDLY_USERNAME/15min'; // REPLACE this with your Calendly event URL
-
-        if(calendlyLink){
-          calendlyLink.setAttribute('href', calendlyUrl);
-          calendlyLink.setAttribute('target','_blank');
-          calendlyLink.setAttribute('rel','noopener');
-        }
-
-        calendlyPopupBtn?.addEventListener('click', function(){
-          // If you add Calendly's widget script, this will open a popup. By default, open new tab.
-          if(window.Calendly && Calendly.initPopupWidget){
-            Calendly.initPopupWidget({ url: calendlyUrl });
-          } else {
-            window.open(calendlyUrl, '_blank');
-          }
-        });
-      })();
-
-      // avatar modal behavior (placeholder)
-      const avatarBtn = document.getElementById('avatarBtn');
-      avatarBtn && avatarBtn.addEventListener('click', ()=>{ alert('Avatar preview'); });
-
-    })();
   </script>
 </body>
 </html>
