@@ -38,6 +38,7 @@
       --panel-gutter:18px;
       --panel-width: min(100vw - 36px, 1600px);
       --panel-max:1600px;
+      --radius:12px;
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
     }
 
@@ -73,7 +74,6 @@
     .page-wrap{
       position: relative;
       z-index: 2;
-      /* we'll keep content inside the same width as panel */
       width: calc(var(--panel-width));
       max-width: calc(var(--panel-width));
       margin: 28px auto;
@@ -102,24 +102,23 @@
     /* TOP GRID: left flexible (auto) | right remaining */
     .top-grid {
       display: grid;
-      grid-template-columns: 360px 1fr;   /* <-- change 360px to any width you prefer */
+      grid-template-columns: 360px 1fr;
       gap: 18px;
-      align-items: start;                 /* keep both columns aligned to top */
+      align-items: start;
       margin-top: 18px;
     }
 
-    /* make skills card fill column height and allow decoration behind content */
     .skills-card {
       position: relative;
       width: 100%;
-      max-width: 360px;   /* same as left column width above */
-      min-height: 220px;  /* adjust if you want taller/shorter default */
+      max-width: 360px;
+      min-height: 220px;
       box-sizing: border-box;
-      overflow: visible;  /* pseudo-element glow sits behind (z-index:-1) */
+      overflow: visible;
       display: flex;
       flex-direction: column;
-      align-self: start;  /* ensure it sits at the top of the column */
-      margin-bottom: 0;   /* prevents extra gap with next section */
+      align-self: start;
+      margin-bottom: 0;
     }
 
     .skills-card::after { z-index: -1; }
@@ -127,7 +126,6 @@
     .skills-card h3{margin:0 0 8px}
     .skills-card .desc{color:var(--muted);font-size:13.6px;line-height:1.45;margin-bottom:10px}
 
-    /* skill badges: flexible & wrap */
     .skill-list{
       display:flex;
       flex-wrap:wrap;
@@ -137,10 +135,8 @@
     }
     .skill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);font-size:13px;color:#e6f0f6;display:inline-flex;align-items:center;gap:8px}
     .skill .years{color:var(--muted);font-weight:700;font-size:12px}
-    /* allow badge text to wrap if long */
     .skill { white-space: normal; max-width: 220px; }
 
-    /* services column and cards */
     .services-col{display:block}
     .accent-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;margin-bottom:10px}
     .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
@@ -152,7 +148,6 @@
     .service p{margin:0;color:var(--muted);font-size:14px}
     .price{margin-top:8px;color:var(--accent-2);font-weight:800}
 
-    /* small cases area and contact */
     .case-list{display:grid;gap:12px;margin-top:12px}
     .case{padding:14px;border-radius:12px;background:linear-gradient(90deg,rgba(123,97,255,0.05),rgba(0,229,255,0.02));border:1px solid rgba(123,97,255,0.06)}
     input,textarea{border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.16);color:#e6f0f6;padding:10px 12px;border-radius:10px;outline:none}
@@ -161,25 +156,75 @@
 
     footer{text-align:center;margin-top:36px;color:var(--muted);font-size:13.5px;padding-bottom:36px}
 
-    /* avatar modal */
     .avatar-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,12,0.6);z-index:9999}
     .avatar-modal.open{display:flex}
     .avatar-modal .modal-card{max-width:720px;width:88%;background:linear-gradient(180deg,#0b1a23,#061017);padding:18px;border-radius:12px;box-shadow:0 40px 120px rgba(2,6,12,0.9);border:1px solid rgba(255,255,255,0.04)}
     .avatar-modal img{width:100%;height:auto;border-radius:8px;display:block}
     .avatar-close{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer}
 
-    /* responsive */
+    /* Responsive */
     @media (max-width:980px){
       .top-grid { grid-template-columns: 1fr; }
       .services-grid{grid-template-columns:1fr}
       .avatar-btn{width:60px;height:60px}
-      /* keep skills card natural height on small screens */
       .skills-card { max-width: 100%; min-height: auto; }
     }
     @media (max-width:560px){
       h1{font-size:18px}
       p.lead{font-size:13px}
     }
+
+    /* ----------------------
+       Contact / Hire-me styles
+       ---------------------- */
+    .contact-card{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 6px 30px rgba(0,0,0,0.45);
+      box-sizing:border-box;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+    .contact-left{flex:0 0 300px;min-width:240px}
+    .contact-right{flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px}
+
+    .contact-left h3{margin:0 0 6px}
+    .contact-left .subtitle{color:var(--muted);font-size:14px;margin:0 0 12px}
+    .contact-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+    .contact-list a{color:var(--accent);text-decoration:none;font-weight:700}
+    .contact-row{display:flex;align-items:center;gap:8px}
+    .whatsapp-quick{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;color:#bfefff;cursor:pointer}
+
+    .contact-right input,.contact-right textarea{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.04); color:#e7f6ff;
+      padding:12px 14px; border-radius:10px; outline:none; width:100%;
+      font-size:14px;
+    }
+    .contact-right .row{display:flex;gap:12px}
+    .contact-right .row input{flex:1}
+    .actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+    .btn-gradient{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border:none;color:#051118;font-weight:700;padding:10px 18px;border-radius:12px;cursor:pointer;
+    }
+    .btn-secondary{
+      background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer;
+    }
+    .form-status{margin-top:8px;color:var(--muted);font-size:13px}
+
+    @media (max-width:880px){
+      .contact-card{flex-direction:column}
+      .contact-left{width:100%}
+      .whatsapp-quick{margin-left:0}
+    }
+
+    /* visually hidden for accessibility */
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
@@ -213,7 +258,6 @@
         <p class="desc">Sr. DevOps engineer with 6 years of experience across cloud platforms, automation, monitoring, scaling and production-grade deployments.</p>
 
         <div class="skill-list" aria-hidden="false" role="list">
-          <!-- experienced first -->
           <div class="skill">AWS <span class="years">6y</span></div>
           <div class="skill">Azure <span class="years">2y</span></div>
           <div class="skill">GCP <span class="years">2y</span></div>
@@ -289,28 +333,54 @@
       <div id="caseList" class="case-list"></div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="card">
-      <h3>Contact Me</h3>
-      <p style="color:var(--muted)">Fast response · Evening & weekend availability</p>
+    <!-- Contact (updated) -->
+    <section id="contact" class="card contact-card" aria-labelledby="contactTitle">
+      <div class="contact-left">
+        <h3 id="contactTitle" style="margin-top:0">Contact Me</h3>
+        <p class="subtitle">Fast response · Evening & weekend availability</p>
 
-      <p><strong>WhatsApp:</strong> <a href="https://wa.me/910005025888" style="color:var(--accent)">+91 8875025888</a></p>
-      <p><strong>Email:</strong> <a href="mailto:work@devopswithgourav.com" style="color:var(--accent)">work@devopswithgourav.com</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/gourav-saini-yes" style="color:var(--accent)">gouravsaini</a></p>
+        <ul class="contact-list" aria-label="contact methods">
+          <li class="contact-row">
+            <span style="color:var(--muted);min-width:86px">WhatsApp:</span>
+            <a href="https://wa.me/918875025888" target="_blank" rel="noopener">+91 8875025888</a>
+            <button class="whatsapp-quick" id="whatsappQuickBtn" title="Send quick message on WhatsApp">Message</button>
+          </li>
 
-      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xiiiiiig" method="POST">
-        <div style="display:flex;gap:10px;margin-bottom:10px;">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
+          <li class="contact-row">
+            <span style="color:var(--muted);min-width:86px">Email:</span>
+            <a href="mailto:work@devopswithgourav.com">work@devopswithgourav.com</a>
+          </li>
+
+          <li class="contact-row">
+            <span style="color:var(--muted);min-width:86px">LinkedIn:</span>
+            <a href="https://www.linkedin.com/in/gouravsaini" target="_blank" rel="noopener">gouravsaini</a>
+          </li>
+        </ul>
+
+        <p class="small-note" style="margin-top:12px;color:var(--muted)">Prefer a short call? Book a 15-min slot on <a href="#" id="calendly" style="color:var(--accent)">Calendly</a>.</p>
+      </div>
+
+      <form id="contactForm" class="contact-right" action="https://formspree.io/f/xiiiiiig" method="POST" novalidate>
+        <div class="row">
+          <label class="sr-only" for="name">Your name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+
+          <label class="sr-only" for="email">Your email</label>
+          <input id="email" name="email" type="email" placeholder="Your email" required />
         </div>
 
-        <input type="text" name="project" placeholder="Project short description">
-        <textarea name="message" placeholder="More details"></textarea>
+        <label class="sr-only" for="project">Project short description</label>
+        <input id="project" name="project" type="text" placeholder="Project short description" />
 
-        <div style="margin-top:10px;display:flex;align-items:center;gap:12px;">
-          <button class="btn-send" type="submit">Send Message</button>
-          <span id="formStatus" style="color:var(--muted);font-size:14px"></span>
+        <label class="sr-only" for="message">More details</label>
+        <textarea id="message" name="message" rows="4" placeholder="More details (stack, timeline, budget)"></textarea>
+
+        <div class="actions" style="margin-top:6px">
+          <button type="submit" class="btn-gradient" id="sendBtn">Send Message</button>
+          <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
         </div>
+
+        <p id="formStatus" class="form-status" aria-live="polite"></p>
       </form>
     </section>
 
@@ -327,7 +397,7 @@
     </div>
   </div>
 
-  <!-- CASES loader & form handling & avatar JS -->
+  <!-- Combined JS: cases loader, enhanced contact handling, whatsapp quick, avatar modal -->
   <script>
   (function(){
     // year
@@ -362,30 +432,96 @@
       function escapeHtml(s=''){ return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
     })();
 
-    // contact form: Formspree fallback to mailto
+    /* -----------------------------
+       Contact form handling (enhanced)
+       - Uses action attribute if provided (Formspree or your endpoint).
+       - If action is missing/placeholder, falls back to mailto: with prefilled body.
+       ----------------------------- */
     (function(){
       const form = document.getElementById('contactForm');
       const status = document.getElementById('formStatus');
+      const sendBtn = document.getElementById('sendBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const whatsappQuick = document.getElementById('whatsappQuickBtn');
+
+      function setStatus(msg, isError=false){
+        status.textContent = msg;
+        status.style.color = isError ? '#f6b1b1' : '#bfe6ff';
+      }
+
+      // WhatsApp quick button
+      whatsappQuick?.addEventListener('click', () => {
+        const text = encodeURIComponent("Hi Gourav, I found your portfolio and need quick DevOps help. Can we chat?");
+        window.open('https://wa.me/918875025888?text=' + text, '_blank');
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        form.reset();
+        setStatus('');
+      });
+
       form.addEventListener('submit', async function(e){
         e.preventDefault();
-        const action = (form.getAttribute('action')||'').trim();
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        if(!name || !email){ status.textContent = 'Please enter name and email.'; status.style.color='#f6b1b1'; return; }
+        sendBtn.disabled = true;
+        setStatus('Sending...');
 
-        const placeholder = !action || action.includes('your_form_id') || action.endsWith('/f/');
-        if(placeholder){
-          status.textContent = 'Form not configured — opening email client.';
-          status.style.color = 'var(--muted)';
-          setTimeout(()=>{ window.location.href = `mailto:work@devopswithgourav.com?subject=${encodeURIComponent('Website enquiry from '+name)}&body=${encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+(form.project.value||'')+'\n\n'+(form.message.value||''))}` }, 500);
+        const name = (form.name.value || '').trim();
+        const email = (form.email.value || '').trim();
+        const project = (form.project.value || '').trim();
+        const message = (form.message.value || '').trim();
+
+        if(!name || !email){
+          setStatus('Please add your name and email.', true);
+          sendBtn.disabled = false;
           return;
         }
 
-        try{
-          const resp = await fetch(action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
-          if(resp.ok){ status.textContent='Thanks — message sent.'; status.style.color='#90ee90'; form.reset(); } else { status.textContent='Submission failed — try email.'; status.style.color='#f6b1b1'; }
-        }catch(err){ status.textContent='Network error — try again.'; status.style.color='#f6b1b1'; }
+        const action = (form.getAttribute('action') || '').trim();
+        const isPlaceholder = !action || action.includes('your_form_id') || action.endsWith('/f/') || action === '#';
+
+        if(!isPlaceholder){
+          // try to POST to the provided action (Formspree supports form POST)
+          try{
+            const resp = await fetch(action, {
+              method: form.method || 'POST',
+              headers: {'Accept': 'application/json'},
+              body: new FormData(form)
+            });
+            if(resp.ok){
+              setStatus('Thanks — message sent.');
+              form.reset();
+            } else {
+              // Some endpoints return 200 but not ok — try to parse message
+              const json = await resp.json().catch(()=>null);
+              if(json && (json.ok || json.success)) {
+                setStatus('Thanks — message sent.');
+                form.reset();
+              } else {
+                throw new Error('Submission failed');
+              }
+            }
+          }catch(err){
+            setStatus('Submission failed — opening mail client as fallback.', true);
+            // fallback to mailto after a short delay
+            setTimeout(()=>openMailto(), 600);
+          } finally {
+            sendBtn.disabled = false;
+          }
+          return;
+        }
+
+        // placeholder or missing form endpoint -> mailto fallback
+        openMailto();
+        sendBtn.disabled = false;
+
+        function openMailto(){
+          setStatus('Form not configured — opening email client.');
+          const subject = encodeURIComponent(project || 'DevOps inquiry from portfolio');
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProject: ${project}\n\n${message}`);
+          window.location.href = `mailto:work@devopswithgourav.com?subject=${subject}&body=${body}`;
+        }
       });
+
     })();
 
     // avatar modal behavior
@@ -398,6 +534,7 @@
 
     // keyboard close (esc)
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { avatarModal.classList.remove('open'); avatarModal.setAttribute('aria-hidden','true'); } });
+
   })();
   </script>
 </body>
