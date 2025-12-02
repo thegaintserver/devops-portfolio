@@ -19,14 +19,14 @@
       --panel-bg: #071021;
       --panel-accent: #071525;
       --muted:#9aa6b2;
-
+  
       /* Card / elevated style (Option 1) */
       --card-bg: #0b1822;
       --card-border: rgba(255,255,255,0.04);
       --card-elev: 0 18px 60px rgba(2,6,12,0.9);
       --card-radius: 14px;
       --accent-edge: linear-gradient(180deg,#00e5ff,#7b61ff);
-
+  
       /* Misc */
       --accent:#00e5ff;
       --accent-2:#7b61ff;
@@ -34,7 +34,7 @@
       --panel-max:1600px;
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial;
     }
-
+  
     html,body{
       height:100%;
       margin:0;
@@ -45,7 +45,7 @@
       overflow-x: hidden;
       line-height:1.5;
     }
-
+  
     /* fixed solid panel (center) */
     .back-panel{
       position:fixed;
@@ -63,7 +63,7 @@
       box-sizing: border-box;
       overflow: hidden;
     }
-
+  
     /* content */
     .page-wrap{
       position: relative;
@@ -75,19 +75,19 @@
       box-sizing: border-box;
       overflow-x: hidden;
     }
-
+  
     header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .brand{display:flex;align-items:center;gap:12px}
-
+  
     .avatar-btn{width:72px;height:72px;border-radius:14px;overflow:hidden;border:2px solid rgba(0,229,255,0.22);box-shadow:0 12px 40px rgba(11,229,255,0.06);cursor:pointer;flex-shrink:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06))}
     .avatar-btn img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
-
+  
     h1{margin:0;font-size:24px}
     p.lead{margin:6px 0 0;color:var(--muted);font-size:14.2px;max-width:760px}
-
+  
     .nav-btn{text-decoration:none;color:#021825;padding:8px 12px;border-radius:12px;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(0,229,255,0.06)}
     .nav-btn:hover{transform:translateY(-3px);filter:brightness(1.04)}
-
+  
     /* ---------- SOLID ELEVATED CARD STYLES (Option 1) ---------- */
     .card{
       background: var(--card-bg);
@@ -101,12 +101,12 @@
       overflow: visible;
       margin-bottom: 20px;
     }
-
+  
     .card:hover{
       transform: translateY(-6px);
       box-shadow: 0 28px 80px rgba(2,6,12,0.95);
     }
-
+  
     .card::before{
       content: "";
       position: absolute;
@@ -119,12 +119,12 @@
       opacity: 0.95;
       pointer-events: none;
     }
-
+  
     @media (max-width:560px){
       .card::before{width:3px}
     }
     /* ---------------------------------------------------------- */
-
+  
     .top-grid {
       display: grid;
       grid-template-columns: 360px 1fr;
@@ -132,7 +132,7 @@
       align-items: start;
       margin-top: 18px;
     }
-
+  
     .skills-card {
       position: relative;
       width: 100%;
@@ -145,23 +145,23 @@
       align-self: start;
       margin-bottom: 0;
     }
-
+  
     .accent-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;margin-bottom:10px}
     .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
     .service{position:relative;padding:14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.02)}
     .service h4{margin:0 0 6px;font-size:15px}
     .service p{margin:0;color:var(--muted);font-size:14px}
     .price{margin-top:8px;color:var(--accent-2);font-weight:800}
-
+  
     .case-list{display:grid;gap:12px;margin-top:12px}
     .case{padding:14px;border-radius:12px;background:linear-gradient(90deg,rgba(123,97,255,0.03),rgba(0,229,255,0.01));border:1px solid rgba(123,97,255,0.04)}
-
+  
     input,textarea{border:1px solid rgba(255,255,255,0.06);background:rgba(5,9,12,0.12);color:#e6f0f6;padding:10px 12px;border-radius:10px;outline:none}
     input:focus,textarea:focus{box-shadow:0 0 0 6px rgba(0,229,255,0.06);border-color:var(--accent)}
     .btn-send{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:800;cursor:pointer}
-
+  
     footer{text-align:center;margin-top:36px;color:var(--muted);font-size:13.5px;padding-bottom:36px}
-
+  
     /* responsive */
     @media (max-width:980px){
       .top-grid { grid-template-columns: 1fr; }
@@ -173,7 +173,7 @@
       h1{font-size:18px}
       p.lead{font-size:13px}
     }
-
+  
     /* packages layout */
     .services-order{display:flex;flex-direction:column;gap:18px}
     .packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -182,8 +182,8 @@
     .package-card{background:transparent;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
     .cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
     .btn-small{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021825;font-weight:700;cursor:pointer}
-
-    /* ------------ CONTACT LAYOUT FIXES (stronger) ------------ */
+  
+    /* ---------- CONTACT: stable layout & normal wrapping ---------- */
     .contact-wrapper {
       display: flex;
       gap: 20px;
@@ -192,21 +192,69 @@
       flex-wrap: wrap;
       box-sizing: border-box;
     }
-
-    /* Left info card: larger fixed column so it never shrinks into the form */
+  
+    /* Left info card: larger fixed column */
     .contact-info-card {
       background: transparent;
       border-radius: 12px;
       padding: 20px;
       box-sizing: border-box;
       border: 1px solid rgba(255,255,255,0.02);
-      flex: 0 0 520px;    /* larger fixed width */
+      flex: 0 0 520px;
       min-width: 360px;
       max-width: 58%;
-      word-wrap: break-word;
+      word-break: normal;
       overflow-wrap: break-word;
     }
-
+  
+    /* Row layout: label + value column */
+    .contact-row{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+  
+    /* label fixed width */
+    .contact-row .label{
+      flex: 0 0 92px;
+      color: var(--muted);
+      font-size: 14px;
+      min-width: 80px;
+    }
+  
+    /* value column grows and is allowed to shrink (min-width:0 prevents overflowing flex children) */
+    .contact-row .value{
+      flex: 1 1 0%;
+      min-width: 0;
+      word-break: normal;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+  
+    /* anchor inside value: normal inline text that wraps at word boundaries */
+    .contact-row .value a{
+      display: inline;
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      word-break: normal;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+  
+    /* Whatsapp quick button small */
+    .whatsapp-quick{
+      margin-left: 8px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: #bfefff;
+      cursor: pointer;
+    }
+  
     /* Right form card: smaller visually */
     .contact-form-card {
       background: transparent;
@@ -218,42 +266,20 @@
       min-width: 240px;
       max-width: 42%;
     }
-
-    /* Ensure long text in left card wraps (prevents overlap) */
-    .contact-info-card a,
-    .contact-info-card .label,
-    .contact-info-card .contact-row {
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    /* Make email link wrap and not overflow */
-    .contact-info-card a {
-      display: inline-block;
-      max-width: calc(100% - 70px);
-    }
-
-    .contact-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-    .contact-row .label{min-width:92px;color:var(--muted);font-size:14px}
-    .contact-row a{color:var(--accent);font-weight:700;text-decoration:none}
-    .whatsapp-quick{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;color:#bfefff;cursor:pointer}
+  
+    /* inputs keep full width inside the form card */
     .contact-form-card input,
     .contact-form-card textarea {
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
-      border:1px solid rgba(255,255,255,0.04);
-      color:#e7f6ff;
-      padding:12px 14px;
-      border-radius:10px;
-      outline:none;
-      width:100%;
-      font-size:14px;
+      width: 100%;
+      box-sizing: border-box;
     }
+  
     .contact-form-actions{display:flex;gap:12px;align-items:center;margin-top:8px}
     .btn-gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#051118;font-weight:700;padding:10px 18px;border-radius:12px;cursor:pointer}
     .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
     .form-status{margin-top:8px;color:var(--muted);font-size:13px}
-
-    /* responsive: stack vertically on narrow screens */
+  
+    /* responsive: stack vertically on narrower screens */
     @media (max-width:980px) {
       .contact-wrapper { flex-direction: column; }
       .contact-info-card, .contact-form-card {
@@ -266,10 +292,11 @@
       .contact-form-card { padding: 16px; }
       .whatsapp-quick{ margin-left:0 }
     }
-
+  
     .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
     /* ---------------------------------------------------------- */
   </style>
+
 </head>
 <body>
   <div class="back-panel" aria-hidden="true"></div>
